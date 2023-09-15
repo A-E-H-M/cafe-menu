@@ -7,8 +7,8 @@
  
 using namespace std;
 
-struct menuItemType			// Move to own new file
-{					// If I make it into a class, I can create a constructor and destructor to allow for removing items as well.
+struct menuItemType
+{
     string menuItem;
     double menuPrice;
 };
@@ -19,19 +19,19 @@ void printCheck(menuItemType menuList[], int listSize);
 
 int main()
 {
-  int listSize = 8;			// Run count on menu for we know how big to make the array for items
-  menuItemType menuList[listSize];	// Create the array of item for the menulist
+  int listSize = 8;
+  menuItemType menuList[listSize];
 
   ifstream infile;
   string inputFile;
 
-  inputFile = "current_menu.txt";	// Change file to new name
+  inputFile = "current_menu.txt";
   infile.open(inputFile);
 
-  getData(infile, menuList, listSize);	// Getter function
+  getData(infile, menuList, listSize);
   cout << endl;
-  showMenu(menuList, listSize);		// Print function
-  printCheck(menuList, listSize);	// Print function (overload it?)
+  showMenu(menuList, listSize);	
+  printCheck(menuList, listSize);
 
   infile.close();
 
@@ -58,15 +58,15 @@ void showMenu(menuItemType menuList[], int listSize)
   }
 }
 
-void printCheck(menuItemType menuList[], int listSize)	// Print check should be seperate from automated menu
+void printCheck(menuItemType menuList[], int listSize)
 {
   char answer;
-  double sum = 0.0;			// Should be private
-  double tax = 0.05;			// Const and private
-  int choice, multiple;			// Probably can be public
+  double sum = 0.0;
+  double tax = 0.05;
+  int choice, multiple;
   int yum1, yum2, yum3, yum4, yum5, yum6, yum7, yum8 = 0;
 
-  cout << "You can make 8 selections. Do you want to make one (y/Y) or (n/N)?";
+  cout << "You can make 8 selections. Do you want to make one (y/Y) or (n/N)? ";
   cin >> answer;
   cout << endl;
 
