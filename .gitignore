@@ -1,0 +1,12 @@
+.DS_Store
+cafe_check.cpp
+cafe_items.cpp
+cafe_main2.cpp
+cafe_menu.cpp
+cafe_menu.h
+cafe_menu.o
+cafe_setup.cpp
+cafe_setup.h
+cafe_setup.o
+counting.cpp
+main.cpp
