@@ -1,64 +1,71 @@
 #include <iostream> 
 #include <fstream>
+#include <sstream>
 #include <cmath>
 #include <string>
-#include <limits>
 #include <iomanip>
+#include <vector>
  
-using namespace std;
-
 struct menuItemType
 {
-    string menuItem;
-    double menuPrice;
+	std::string menuItem;
+  std::string menuPrice;
 };
 
-void getData(ifstream& infile, menuItemType menuList[], int listSize);
-void showMenu(menuItemType menuList[], int listSize);
-void printCheck(menuItemType menuList[], int listSize);
+std::vector<menuItemType> getData(const std::string& file);
+void showMenu(std::vector<menuItemType>& menuList);
+void printCheck();
 
 int main()
 {
-  int listSize = 8;
-  menuItemType menuList[listSize];
+  std::vector<menuItemType> menuList;
+  std::string inputFile = "current_menu.txt";
 
-  ifstream infile;
-  string inputFile;
-
-  inputFile = "current_menu.txt";
-  infile.open(inputFile);
-
-  getData(infile, menuList, listSize);
-  cout << endl;
-  showMenu(menuList, listSize);	
-  printCheck(menuList, listSize);
-
-  infile.close();
-
+  menuList = getData(inputFile);
+  showMenu(menuList);	
+  printCheck();
   return 0;
 }
 
-void getData(ifstream& infile, menuItemType menuList[], int listSize) 
-{
-  for (int counter = 0; counter < listSize; counter++)
-  {
-    getline(infile, menuList[counter].menuItem);
-    infile >> menuList[counter].menuPrice;
-    infile.ignore(numeric_limits<streamsize>::max(), '\n');
+std::vector<menuItemType> getData(const std::string& path){
+  std::vector<menuItemType> tempMenuList;
+  std::fstream file(path);
+  if (file.is_open()){
+    std::string line;
+    while (getline(file, line)){
+      std::stringstream tempStruct(line);
+      menuItemType item;
+      std::getline(tempStruct, item.menuItem);
+      std::getline(file, item.menuPrice);
+      tempStruct >> item.menuPrice;
+      tempMenuList.push_back(item);
+    }
+    file.close();
   }
+  else {
+    std::cout << "Your menu file can not be found." << std::endl;
+  }
+  return tempMenuList;
 }
 
-void showMenu(menuItemType menuList[], int listSize)
-{
-  cout << fixed << showpoint << setprecision(2);
-  for (int counter = 0; counter < listSize; counter++)
-  {
-    cout << menuList[counter].menuItem << " " << setw(10)
-         << menuList[counter].menuPrice << " " << endl;
-  }
+void showMenu(std::vector<menuItemType>& menuList){
+  std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu. \n" << std::endl;
+  std::cout << std::setw(5) << std::left << "No." 
+            << std::setw(15) << std::left << "Item" 
+            << std::setw(15) << std::left << "Price" 
+            << std::endl;
+  int i = 1;
+  for (auto& item : menuList){
+		std::cout << std::setw(5) << std::left << i 
+              << std::setw(15) << std::left << item.menuItem 
+              << std::setw(15) << std::left << item.menuPrice 
+              << std::endl;
+    i++;
+	}
+  std::cout << std::endl;
 }
 
-void printCheck(menuItemType menuList[], int listSize)
+void printCheck()
 {
   char answer;
   double sum = 0.0;
@@ -66,62 +73,66 @@ void printCheck(menuItemType menuList[], int listSize)
   int choice, multiple;
   int yum1, yum2, yum3, yum4, yum5, yum6, yum7, yum8 = 0;
 
-  cout << "You can make 8 selections. Do you want to make one (y/Y) or (n/N)? ";
-  cin >> answer;
-  cout << endl;
+  std::cout << "Would you like to put in an order (y/Y) or (n/N)? ";
+  std::cin >> answer;
+  std::cout << std::endl;
 
 while (answer)
 {
   if (answer == 'Y' || answer == 'y')
     {
-      cout << "Enter the item number: ";
-      cin >> choice;
-      cout << "How many would you like to order? ";
-      cin >> multiple;
+	  std::cout << "Enter the item number: ";
+	  std::cin >> choice;
+	  std::cout << "How many would you like to order? ";
+	  std::cin >> multiple;
 
       switch (choice)
         {
         case 1:
-          sum = sum + (1.45 * multiple);
+          sum = sum + (8.45 * multiple);
           yum1++;
           break;
         case 2:
-          sum = sum + (2.45 * multiple);
+          sum = sum + (12.45 * multiple);
           yum2++;
           break;
         case 3:
-          sum = sum + (0.99 * multiple);
+          sum = sum + (1.99 * multiple);
           yum3++;
           break;
         case 4:
-          sum = sum + (1.99 * multiple);
+          sum = sum + (10.99 * multiple);
           yum4++;
           break;
         case 5:
-          sum = sum + (2.49 * multiple);
+          sum = sum + (6.49 * multiple);
           yum5++;
           break;
         case 6:
-          sum = sum + (0.69 * multiple);
+          sum = sum + (3.69 * multiple);
           yum6++;
           break;
         case 7:
-          sum = sum + (0.50 * multiple);
+          sum = sum + (4.50 * multiple);
           yum7++;
           break;
         case 8:
-          sum = sum + (0.75 * multiple);
+          sum = sum + (3.75 * multiple);
           yum8++;
           break;
         }
-    cout << "Select another item ? Y or N ";
-    cin >> answer;
+
+	std::cout << "Select another item ? (y/Y) or (n/N) ";
+	std::cin >> answer;
   }
-  else
+  else {
     answer = false;
   }
+}
 
   tax = tax * sum;
-  cout << "Tax: " << tax << endl;
-  cout << "Amount Due: " << sum + tax << endl;
+  std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
+            << "Tax: " << tax << std::endl;
+  std::cout << std::left 
+            << "Amount Due: " << sum + tax << std::endl;
 }
