@@ -8,43 +8,36 @@
  
 struct menuItemType
 {
-  std::string menuItem;
-  double menuPrice;
-  int itemNum;
+	std::string menuItem;
+  std::string menuPrice;
 };
 
-std::vector<menuItemType> getMenu(const std::string& file);
+std::vector<menuItemType> getData(const std::string& file);
 void showMenu(std::vector<menuItemType>& menuList);
-void printCheck(std::vector<menuItemType>& menuList);
-double itemCost(double& choice, double& multiple, std::vector<menuItemType>& menuList);
-double totalSum(double& item_Cost, double& total);
+void printCheck();
 
 int main()
 {
   std::vector<menuItemType> menuList;
   std::string inputFile = "current_menu.txt";
 
-  menuList = getMenu(inputFile);
+  menuList = getData(inputFile);
   showMenu(menuList);	
-  printCheck(menuList);
+  printCheck();
   return 0;
 }
 
-std::vector<menuItemType> getMenu(const std::string& path){
+std::vector<menuItemType> getData(const std::string& path){
   std::vector<menuItemType> tempMenuList;
   std::fstream file(path);
   if (file.is_open()){
     std::string line;
-	std::string strMenuPrice;
-	int i = 1;
     while (getline(file, line)){
       std::stringstream tempStruct(line);
       menuItemType item;
       std::getline(tempStruct, item.menuItem);
-      std::getline(file, strMenuPrice);
-      tempStruct >> strMenuPrice;
-	  item.menuPrice = stod(strMenuPrice);
-	  item.itemNum = i++;
+      std::getline(file, item.menuPrice);
+      tempStruct >> item.menuPrice;
       tempMenuList.push_back(item);
     }
     file.close();
@@ -72,28 +65,13 @@ void showMenu(std::vector<menuItemType>& menuList){
   std::cout << std::endl;
 }
 
-double itemCost(double& choice, double& multiple, std::vector<menuItemType>& menuList){
-	double total;
-	for (auto& i: menuList){
-		if (choice == i.itemNum){
-			total = total + (i.menuPrice) * multiple;
-		}
-	}
-	return total;
-}
-
-double totalSum(double& item_Cost, double& total){
-	total = total + item_Cost;
-	return total;
-}
-
-void printCheck(std::vector<menuItemType>& menuList)
+void printCheck()
 {
   char answer;
   double sum = 0.0;
   double tax = 0.05;
-  double multiple;
-  double choice;
+  int choice, multiple;
+  int yum1, yum2, yum3, yum4, yum5, yum6, yum7, yum8 = 0;
 
   std::cout << "Would you like to put in an order (y/Y) or (n/N)? ";
   std::cin >> answer;
@@ -107,8 +85,42 @@ while (answer)
 	  std::cin >> choice;
 	  std::cout << "How many would you like to order? ";
 	  std::cin >> multiple;
-	  double perItemCost = itemCost(choice, multiple, menuList);
-	  sum = totalSum(perItemCost, sum);
+
+      switch (choice)
+        {
+        case 1:
+          sum = sum + (8.45 * multiple);
+          yum1++;
+          break;
+        case 2:
+          sum = sum + (12.45 * multiple);
+          yum2++;
+          break;
+        case 3:
+          sum = sum + (1.99 * multiple);
+          yum3++;
+          break;
+        case 4:
+          sum = sum + (10.99 * multiple);
+          yum4++;
+          break;
+        case 5:
+          sum = sum + (6.49 * multiple);
+          yum5++;
+          break;
+        case 6:
+          sum = sum + (3.69 * multiple);
+          yum6++;
+          break;
+        case 7:
+          sum = sum + (4.50 * multiple);
+          yum7++;
+          break;
+        case 8:
+          sum = sum + (3.75 * multiple);
+          yum8++;
+          break;
+        }
 
 	std::cout << "Select another item ? (y/Y) or (n/N) ";
 	std::cin >> answer;
