@@ -5,32 +5,10 @@
 #include <string>
 #include <iomanip>
 #include <vector>
- 
-struct menuItemType
-{
-  std::string menuItem;
-  double menuPrice;
-  int itemNum;
-};
 
-std::vector<menuItemType> getMenu(const std::string& file);
-void showMenu(std::vector<menuItemType>& menuList);
-void printCheck(std::vector<menuItemType>& menuList);
-double itemCost(double& choice, double& multiple, std::vector<menuItemType>& menuList);
-double totalSum(double& item_Cost, double& total);
+#include "cafe_main.hpp"
 
-int main()
-{
-  std::vector<menuItemType> menuList;
-  std::string inputFile = "current_menu.txt";
-
-  menuList = getMenu(inputFile);
-  showMenu(menuList);	
-  printCheck(menuList);
-  return 0;
-}
-
-std::vector<menuItemType> getMenu(const std::string& path){
+std::vector<menuItemType> menu::getMenu(const std::string& path){
   std::vector<menuItemType> tempMenuList;
   std::fstream file(path);
   if (file.is_open()){
@@ -55,7 +33,7 @@ std::vector<menuItemType> getMenu(const std::string& path){
   return tempMenuList;
 }
 
-void showMenu(std::vector<menuItemType>& menuList){
+void menu::showMenu(std::vector<menuItemType>& menuList){
   std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu. \n" << std::endl;
   std::cout << std::setw(5) << std::left << "No." 
             << std::setw(15) << std::left << "Item" 
@@ -72,55 +50,57 @@ void showMenu(std::vector<menuItemType>& menuList){
   std::cout << std::endl;
 }
 
-double itemCost(double& choice, double& multiple, std::vector<menuItemType>& menuList){
+double order::itemCost(int& choice, int& multiple, std::vector<menuItemType>& menuList, receipt& new_receipt){
 	double total;
 	for (auto& i: menuList){
 		if (choice == i.itemNum){
 			total = total + (i.menuPrice) * multiple;
+			new_receipt.orderEntries.push_back(total);
 		}
 	}
 	return total;
 }
 
-double totalSum(double& item_Cost, double& total){
-	total = total + item_Cost;
-	return total;
+double order::calculateTax(receipt& new_receipt){
+	for (auto& i: new_receipt.orderEntries){
+	new_receipt.sum = new_receipt.sum + i;
+	}
+	new_receipt.totalTax = new_receipt.sum * new_receipt.tax; 
+	return new_receipt.totalTax;
 }
 
-void printCheck(std::vector<menuItemType>& menuList)
-{
-  char answer;
-  double sum = 0.0;
-  double tax = 0.05;
-  double multiple;
-  double choice;
+double order::calculateFinalSum(receipt& new_receipt){
+	new_receipt.sumWithTax = new_receipt.sum + new_receipt.sum;
+	return new_receipt.sumWithTax;
+}
 
+void order::takeOrder(std::vector<menuItemType>& menuList, receipt& new_receipt, customerInput& new_customer)
+{
   std::cout << "Would you like to put in an order (y/Y) or (n/N)? ";
-  std::cin >> answer;
+  std::cin >> new_customer.answer;
   std::cout << std::endl;
 
-while (answer)
+while (new_customer.answer)
 {
-  if (answer == 'Y' || answer == 'y')
+  if (new_customer.answer == 'Y' || new_customer.answer == 'y')
     {
 	  std::cout << "Enter the item number: ";
-	  std::cin >> choice;
+	  std::cin >> new_customer.choice;
 	  std::cout << "How many would you like to order? ";
-	  std::cin >> multiple;
-	  double perItemCost = itemCost(choice, multiple, menuList);
-	  sum = totalSum(perItemCost, sum);
-
+	  std::cin >> new_customer.multiple;
+	itemCost(new_customer.choice, new_customer.multiple, menuList, new_receipt);
 	std::cout << "Select another item ? (y/Y) or (n/N) ";
-	std::cin >> answer;
+	std::cin >> new_customer.answer;
   }
   else {
-    answer = false;
+    new_customer.answer = false;
   }
 }
+}
 
-  tax = tax * sum;
-  std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
-            << "Tax: " << tax << std::endl;
+void order::printReceipt(receipt& new_receipt){
+	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
+            << "Tax: " << new_receipt.totalTax << std::endl;
   std::cout << std::left 
-            << "Amount Due: " << sum + tax << std::endl;
+            << "Amount Due: " << new_receipt.sumWithTax << std::endl;
 }
