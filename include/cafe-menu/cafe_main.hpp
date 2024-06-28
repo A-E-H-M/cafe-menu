@@ -1,6 +1,4 @@
-// Header file
-#include <vector>
-#include <string>
+// By: Alex H Mann
 
 struct menuItemType{
 	std::string menuItem;
@@ -24,16 +22,22 @@ struct customerInput{
 class menu{
 	public:
 		std::vector<menuItemType> menuList;
+		
 		std::vector<menuItemType> getMenu(const std::string& file);
-		void showMenu(std::vector<menuItemType>& menuList);
+		void showMenu();
 };
 
 class order{
-	public:
+	private:
 		receipt new_receipt;
-		void takeOrder(std::vector<menuItemType>& menuList, receipt& new_receipt, customerInput& new_customer);
-		void printReceipt(receipt& new_receipt);
-		double itemCost(int& choice, int& multiple, std::vector<menuItemType>& menuList, receipt& new_receipt);
-		double calculateTax(receipt& new_receipt);
-		double calculateFinalSum(receipt& new_receipt);
+		customerInput new_customer;
+		
+	public:
+		void takeOrder(std::vector<menuItemType>& menuList);
+		void printReceipt();
+
+		double itemCost(int& choice, int& multiple, std::vector<menuItemType>& menuList);
+		double calculateTax();
+		double calculateFinalSum();
 };
+
