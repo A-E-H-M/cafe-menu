@@ -63,7 +63,7 @@ void order::takeOrder(std::vector<menuItemType>& menuList){
 			std::cin >> new_customer.choice;
 			std::cout << "How many would you like to order? ";
 			std::cin >> new_customer.multiple;
-			itemCost(new_customer.choice, new_customer.multiple, menuList);
+			itemCost(menuList);
 			std::cout << "Select another item ? (y/Y) or (n/N) ";
 			std::cin >> new_customer.answer;
 			std::cout << std::endl;
@@ -82,11 +82,11 @@ void order::printReceipt(){
               << "Amount Due: " << new_receipt.sumWithTax << std::endl;
 }
 
-double order::itemCost(int& choice, int& multiple, std::vector<menuItemType>& menuList){
+double order::itemCost(std::vector<menuItemType>& menuList){
 	double total;
 	for (auto& i: menuList){
-		if (choice == i.itemNum){
-			total = total + (i.menuPrice) * multiple;
+		if (new_customer.choice == i.itemNum){
+			total = total + (i.menuPrice) * new_customer.multiple;
 			new_receipt.orderEntries.push_back(total);
 		}
 	}

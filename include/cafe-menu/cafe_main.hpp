@@ -36,7 +36,7 @@ class order{
 		void takeOrder(std::vector<menuItemType>& menuList);
 		void printReceipt();
 
-		double itemCost(int& choice, int& multiple, std::vector<menuItemType>& menuList);
+		double itemCost(std::vector<menuItemType>& menuList);
 		double calculateTax();
 		double calculateFinalSum();
 };
