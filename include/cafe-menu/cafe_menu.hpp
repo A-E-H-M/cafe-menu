@@ -1,4 +1,8 @@
 // By: Alex H Mann
+#pragma once
+
+#include <string>
+#include <vector>
 
 struct menuItemType{
 	std::string menuItem;
