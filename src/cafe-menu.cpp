@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "cafe-menu/cafe-menu.hpp"
+#include "../include/cafe-menu/cafe-menu.hpp"
 
 // class menu
 menu::menu(){};
