@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 
-#include "../include/cafe-menu/cafe-menu.hpp"
+#include "cafe-menu/cafe-menu.hpp"
 
 int main(){
 	menu new_menu;
