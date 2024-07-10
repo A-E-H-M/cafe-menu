@@ -7,11 +7,9 @@
 #include <iomanip>
 #include <vector>
 
-#include "cafe-menu/cafe-menu.hpp"
+#include "../include/cafe-menu/cafe-menu.hpp"
 
 // class menu
-menu::menu(){};
-
 std::vector<menuItem> menu::getMenu(const std::string& path){
 	std::vector<menuItem> tempMenuList;
  	std::fstream file(path);
@@ -38,14 +36,14 @@ std::vector<menuItem> menu::getMenu(const std::string& path){
 	return tempMenuList;
 }
 
-void menu::displayMenu(){
-  	std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu. \n" << std::endl;
+void menu::displayMenu() const {
+  	std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
   	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
               << std::endl;
   	int i = 1;
-  	for (auto& item : menuList){
+  	for (const auto& item : menuList){
 		std::cout << std::setw(5) << std::left << i 
               	  << std::setw(15) << std::left << item.menuItem 
               	  << std::setw(15) << std::left << item.menuPrice 
@@ -55,11 +53,7 @@ void menu::displayMenu(){
   	std::cout << std::endl;
 }
 
-menu::~menu(){};
-
 // class order
-order::order(){};
-
 bool order::orderInProgress(){
 	startOrder();
 	validateAnswer();
@@ -69,6 +63,7 @@ bool order::orderInProgress(){
 				return true;
 			case 1:
 				orderedItems.push_back(addToOrder());
+				newCustomer.answer = orderedItems.back().answer;
 				break;
 			default:
 				continueOrder();
@@ -81,11 +76,11 @@ bool order::orderInProgress(){
 
 void order::startOrder(){
 	std::cout << "Would you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
-	std::cin >> new_customer.answer;
+	std::cin >> newCustomer.answer;
 }
 
 void order::validateAnswer(){
-	switch (new_customer.answer){
+	switch (newCustomer.answer){
 		case 'Y':
 		case 'y':
 			tempInput = 1;
@@ -100,7 +95,7 @@ void order::validateAnswer(){
 	}
 }
 
-struct customerInput order::addToOrder(){
+const customerInput order::addToOrder(){
 	customerInput tempCustomerOrder;
 	std::cout << "Enter the item number: ";
 	std::cin >> tempCustomerOrder.choice;
@@ -108,44 +103,19 @@ struct customerInput order::addToOrder(){
 	std::cin >> tempCustomerOrder.multiple;
 	std::cout << "Would you like to order another item? ";
 	std::cin >> tempCustomerOrder.answer;
-	new_customer.answer = tempCustomerOrder.answer;
 	return tempCustomerOrder;
 }
 
 void order::continueOrder(){
 	std::cout << "Would you like to continue your order? ";
-	std::cin >> new_customer.answer;
+	std::cin >> newCustomer.answer;
 }
 
-void order::printReceipt(){
+void order::printReceipt() const {
 	std::cout << "\nThank you for choosing Basil & Thyme Cafe to satisfy your hunger!\n"
 			  << std::setw(12) << std::right << std::setprecision(2) << std::fixed
-			  << "Tax: " << new_receipt.totalTax << std::endl;
+			  << "Tax: " << newReceipt.totalTax << std::endl;
   	std::cout << std::left 
-              << "Amount Due: " << new_receipt.sumWithTax << "\n";
+              << "Amount Due: " << newReceipt.sumWithTax << "\n";
 }
 
-double order::calculateFinalSum(std::vector<menuItem>& menuList){
-	for (auto& selectedItem: orderedItems){
-		new_receipt.sum = new_receipt.sum + calculateLineItem(selectedItem, menuList);
-	}
-	new_receipt.totalTax = calculateTax();
-	new_receipt.sumWithTax = new_receipt.sum + new_receipt.totalTax;
-	return new_receipt.sumWithTax;
-	}
-
-double order::calculateLineItem(customerInput& selectedItem, std::vector<menuItem>& menuList){
-	double tempItemTotal = 0.0;
-	for (auto& item: menuList){
-		if (selectedItem.choice == item.itemNum){
-			tempItemTotal = item.menuPrice * selectedItem.multiple;
-		}
-	}
-	return tempItemTotal;
-}
-
-double order::calculateTax(){
-	return new_receipt.sum * new_receipt.tax;
-}
-
-order::~order(){};

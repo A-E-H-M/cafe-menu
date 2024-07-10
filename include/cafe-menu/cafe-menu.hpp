@@ -10,17 +10,10 @@ struct menuItem{
 	int itemNum;
 };
 
-struct receipt{
-	std::vector<double> orderEntries;
-	double sum = 0.0;
-	double tax = 0.05;
-	double totalTax = 0.0;
-	double sumWithTax = 0.0;
-};
-
 struct customerInput{
 	char answer;
-	int choice, multiple;
+	int choice; 
+	int multiple;
 };
 
 class menu{
@@ -29,31 +22,37 @@ class menu{
 		std::vector<menuItem> menuList;
 		
 		std::vector<menuItem> getMenu(const std::string& file);
-		void displayMenu();
-		menu();
-		~menu();
+		void displayMenu() const;
+};
+
+class receipt{
+	private:
+		double sum {0.0};
+		const double tax {0.05};
+
+	public:
+		double sumWithTax {0.0};
+		double totalTax {0.0};
+
+		double calculateFinalSum(const std::vector<menuItem>& menuList, const std::vector<customerInput>& orderedItems);
+		double calculateLineItem(const customerInput& selectedItem, const std::vector<menuItem>& menuList) const;
+		double calculateTax() const;
 };
 
 class order{
 	private:
-		receipt new_receipt;
-		customerInput new_customer;
+		customerInput newCustomer;
 		int tempInput;
 
 	public:
 		std::vector<customerInput> orderedItems;
-		
+		receipt newReceipt;
+
 		void startOrder();
-		void printReceipt();
 		bool orderInProgress();	
 		void validateAnswer();
-		struct customerInput addToOrder();
+		const customerInput addToOrder();
 		void continueOrder();
-
-		double calculateFinalSum(std::vector<menuItem>& menuList);
-		double calculateLineItem(customerInput& selectedItem, std::vector<menuItem>& menuList);
-		double calculateTax();
-		order();
-		~order();
+		void printReceipt() const;
 };
 

@@ -1,19 +1,19 @@
 #include <string>
 #include <vector>
 
-#include "cafe-menu/cafe-menu.hpp"
+#include "../include/cafe-menu/cafe-menu.hpp"
 
 int main(){
-	menu new_menu;
-  	std::string inputFile = "current-menu.txt";
-  	order new_order;
+	menu newMenu;
+  	const std::string inputFile = "current-menu.txt";
+  	order newOrder;
 
-  	new_menu.menuList = new_menu.getMenu(inputFile);
-  	new_menu.displayMenu();
+  	newMenu.menuList = newMenu.getMenu(inputFile);
+	newMenu.displayMenu();
 
-	new_order.orderInProgress();
-	new_order.calculateFinalSum(new_menu.menuList);
-	new_order.printReceipt();
+	newOrder.orderInProgress();
+	newOrder.newReceipt.calculateFinalSum(newMenu.menuList, newOrder.orderedItems);
+	newOrder.printReceipt();
 
   	return 0;
 };
