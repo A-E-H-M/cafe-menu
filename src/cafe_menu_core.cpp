@@ -3,10 +3,13 @@
 #include <string>
 #include <vector>
 
-#include "cafe-menu/cafe_menu.hpp"
+#include "cafe-menu/cafe_menu_core.hpp"
+#include "cafe-menu/cafe_menu_iostream.hpp"
+
+using namespace cafeMenu;
 
 //class receipt
-double receipt::calculateFinalSum(const std::vector<menuItem>& menuList, const std::vector<customerInput>& orderedItems){
+double receipt::calculateFinalSum(const std::vector<menuItem>& menuList, const std::vector<customerInput>& orderedItems) {
 	for (const auto& selectedItem: orderedItems){
 		sum += calculateLineItem(selectedItem, menuList);
 	}
@@ -25,6 +28,6 @@ double receipt::calculateLineItem(const customerInput& selectedItem, const std::
 	return tempItemTotal;
 }
 
-double receipt::calculateTax() const{
+double receipt::calculateTax() const {
 	return sum * tax;
 }

@@ -7,10 +7,13 @@
 #include <iomanip>
 #include <vector>
 
-#include "cafe-menu/cafe_menu.hpp"
+#include "cafe-menu/cafe_menu_iostream.hpp"
+#include "cafe-menu/cafe_menu_core.hpp"
+
+using namespace cafeMenu;
 
 // class menu
-std::vector<menuItem> menu::getMenu(const std::string& path){
+std::vector<menuItem> menuCatalog::getMenu(const std::string& path) {
 	std::vector<menuItem> tempMenuList;
  	std::fstream file(path);
  	if (file.is_open()){
@@ -27,7 +30,6 @@ std::vector<menuItem> menu::getMenu(const std::string& path){
 	  		item.itemNum = i++;
       		tempMenuList.push_back(item);
     	}
-		numOfItems = i;
     file.close();
   	}
   	else {
@@ -36,26 +38,43 @@ std::vector<menuItem> menu::getMenu(const std::string& path){
 	return tempMenuList;
 }
 
-void menu::displayMenu() const {
+//class displayOrder
+void displayOrder::displayMenu() const {
   	std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
   	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
               << std::endl;
   	int i = 1;
-  	for (const auto& item : menuList){
+  	for (const auto& item : menu.menuList){
 		std::cout << std::setw(5) << std::left << i 
               	  << std::setw(15) << std::left << item.menuItem 
               	  << std::setw(15) << std::left << item.menuPrice 
               	  << std::endl;
-    	i++;
 	}
   	std::cout << std::endl;
 }
 
+void displayOrder::startOrder() {
+	std::cout << "Would you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
+}
+
+void displayOrder::continueOrder() {
+	std::cout << "Would you like to continue your order? ";
+}
+
+void displayOrder::printReceipt(const receipt& newReceipt) const {
+	std::cout << "\nThank you for choosing Basil & Thyme Cafe to satisfy your hunger!\n"
+			  << std::setw(12) << std::right << std::setprecision(2) << std::fixed
+			  << "Tax: " << newReceipt.totalTax << std::endl;
+  	std::cout << std::left 
+              << "Amount Due: " << newReceipt.sumWithTax << "\n";
+}
+
 // class order
-bool order::orderInProgress(){
-	startOrder();
+bool order::orderInProgress() {
+	newOrder.startOrder();
+	std::cin >> newCustomer.answer;
 	validateAnswer();
 	while (tempInput >= -1){
 		switch(tempInput){
@@ -66,7 +85,8 @@ bool order::orderInProgress(){
 				newCustomer.answer = orderedItems.back().answer;
 				break;
 			default:
-				continueOrder();
+				newOrder.continueOrder();
+				std::cin >> newCustomer.answer;
 				break;
 		}
 		validateAnswer();
@@ -74,12 +94,7 @@ bool order::orderInProgress(){
 	return false;
 }
 
-void order::startOrder(){
-	std::cout << "Would you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
-	std::cin >> newCustomer.answer;
-}
-
-void order::validateAnswer(){
+void order::validateAnswer() {
 	switch (newCustomer.answer){
 		case 'Y':
 		case 'y':
@@ -95,7 +110,7 @@ void order::validateAnswer(){
 	}
 }
 
-const customerInput order::addToOrder(){
+const customerInput order::addToOrder() {
 	customerInput tempCustomerOrder;
 	std::cout << "Enter the item number: ";
 	std::cin >> tempCustomerOrder.choice;
@@ -105,17 +120,3 @@ const customerInput order::addToOrder(){
 	std::cin >> tempCustomerOrder.answer;
 	return tempCustomerOrder;
 }
-
-void order::continueOrder(){
-	std::cout << "Would you like to continue your order? ";
-	std::cin >> newCustomer.answer;
-}
-
-void order::printReceipt() const {
-	std::cout << "\nThank you for choosing Basil & Thyme Cafe to satisfy your hunger!\n"
-			  << std::setw(12) << std::right << std::setprecision(2) << std::fixed
-			  << "Tax: " << newReceipt.totalTax << std::endl;
-  	std::cout << std::left 
-              << "Amount Due: " << newReceipt.sumWithTax << "\n";
-}
-
