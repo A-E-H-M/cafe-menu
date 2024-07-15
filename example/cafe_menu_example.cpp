@@ -1,11 +1,11 @@
 #include <string>
 #include <vector>
 
-#include "cafe-menu/cafe-menu.hpp"
+#include "cafe-menu/cafe_menu.hpp"
 
 int main(){
 	menu newMenu;
-  	const std::string inputFile = "current-menu.txt";
+  	const std::string inputFile = "current_menu.txt";
   	order newOrder;
 
   	newMenu.menuList = newMenu.getMenu(inputFile);

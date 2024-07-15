@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "cafe-menu/cafe-menu.hpp"
+#include "cafe-menu/cafe_menu.hpp"
 
 // class menu
 std::vector<menuItem> menu::getMenu(const std::string& path){

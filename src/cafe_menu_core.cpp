@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "cafe-menu/cafe-menu.hpp"
+#include "cafe-menu/cafe_menu.hpp"
 
 //class receipt
 double receipt::calculateFinalSum(const std::vector<menuItem>& menuList, const std::vector<customerInput>& orderedItems){
