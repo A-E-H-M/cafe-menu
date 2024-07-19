@@ -14,43 +14,40 @@ namespace cafeMenu
 		int itemNum;
 	};
 
+	struct customerInput {
+		int choice; 
+		int multiple;
+		double itemTotal {0.0};
+	};
+	
+	struct billItemization {
+		double tax {0.0};
+		double subTotal {0.0};
+		double taxTotal {0.0};
+		double total {0.0};
+	};
+
 	class menuCatalog {
 		public:
 			std::vector<menuItem> menuList;
 		
-			std::vector<menuItem> getMenu(const std::string& file);
+			void setMenu(const std::string& filePath);
 	};
 
-	struct customerInput {
-		char answer;
-		int choice; 
-		int multiple;
-	};
-	
 	class displayOrder {
-		private:
-			menuCatalog menu;
-		
 		public:
-			void displayMenu() const;
-			void startOrder();
-			void continueOrder();
-			void printReceipt(const receipt& newReceipt) const;
+			void displayMenu(const int&, const std::string&, const double&) const;
+			void prompts(const int p) const;
+			void displayReceipt(const double&, const double&);
 	};
 
 	class order {
-		private:
-			int tempInput;
-
 		public:
 			std::vector<customerInput> orderedItems;
-			customerInput newCustomer;
-			receipt newReceipt;
-			displayOrder newOrder;
+			std::vector<double> orderItemTotals;
 
-			bool orderInProgress();	
-			void validateAnswer();
-			const customerInput addToOrder();
+			int validateAnswer(const char temp);
+			customerInput addToOrder(const displayOrder& display);
 	};
 
 };

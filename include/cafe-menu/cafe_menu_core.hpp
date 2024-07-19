@@ -1,24 +1,16 @@
 #pragma once
 
-#include <string>
 #include <vector>
 
 #include "cafe-menu/cafe_menu_iostream.hpp"
 
 namespace cafeMenu
 {
-	class receipt {
-		private:
-			double sum {0.0};
-			const double tax {0.05};
-
+	class calculateBill {
 		public:
-			double sumWithTax {0.0};
-			double totalTax {0.0};
-
-			double calculateFinalSum(const std::vector<menuItem>& menuList, const std::vector<customerInput>& orderedItems);
-			double calculateLineItem(const customerInput& selectedItem, const std::vector<menuItem>& menuList) const;
-			double calculateTax() const;
+			double calculateItemTotal(const double& itemPrice, const int& multiple) const;
+			double calculateSubTotal(const std::vector<double>& costByItem) const;
+			double calculateTax(const double& total, const double& tax) const;
+			double calculateTotal(const double& subTotal, const double& tax) const;
 	};
-
 };

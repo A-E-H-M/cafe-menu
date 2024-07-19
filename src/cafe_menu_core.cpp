@@ -1,33 +1,27 @@
 // By: Alex H Mann
 
-#include <string>
 #include <vector>
 
 #include "cafe-menu/cafe_menu_core.hpp"
-#include "cafe-menu/cafe_menu_iostream.hpp"
 
 using namespace cafeMenu;
 
-//class receipt
-double receipt::calculateFinalSum(const std::vector<menuItem>& menuList, const std::vector<customerInput>& orderedItems) {
-	for (const auto& selectedItem: orderedItems){
-		sum += calculateLineItem(selectedItem, menuList);
-	}
-	totalTax = calculateTax();
-	sumWithTax = sum + totalTax;
-	return sumWithTax;
-	}
-
-double receipt::calculateLineItem(const customerInput& selectedItem, const std::vector<menuItem>& menuList) const {
-	double tempItemTotal = 0.0;
-	for (const auto& item: menuList){
-		if (selectedItem.choice == item.itemNum){
-			tempItemTotal = item.menuPrice * selectedItem.multiple;
-		}
-	}
-	return tempItemTotal;
+double calculateBill::calculateItemTotal(const double& itemPrice, const int& multiple) const {
+	return itemPrice * multiple;
 }
 
-double receipt::calculateTax() const {
-	return sum * tax;
+double calculateBill::calculateSubTotal(const std::vector<double>& costByItem) const {
+	double total {0};
+	for (auto& item: costByItem){
+		total += item;
+	}
+	return total;
+}
+
+double calculateBill::calculateTax(const double& total, const double& tax) const {
+	return total * tax;
+}
+
+double calculateBill::calculateTotal(const double& subTotal, const double& tax) const {
+	return subTotal + tax;
 }

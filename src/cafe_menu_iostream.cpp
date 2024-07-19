@@ -13,13 +13,12 @@
 using namespace cafeMenu;
 
 // class menu
-std::vector<menuItem> menuCatalog::getMenu(const std::string& path) {
-	std::vector<menuItem> tempMenuList;
- 	std::fstream file(path);
+void menuCatalog::setMenu(const std::string& filePath) {
+ 	std::fstream file(filePath);
  	if (file.is_open()){
     	std::string line;
 		std::string strMenuPrice;
-		int i = 1;
+		int i {0};
     	while (getline(file, line)){
       		std::stringstream tempStruct(line);
       		menuItem item;
@@ -27,96 +26,84 @@ std::vector<menuItem> menuCatalog::getMenu(const std::string& path) {
       		std::getline(file, strMenuPrice);
       		tempStruct >> strMenuPrice;
 	  		item.menuPrice = stod(strMenuPrice);
-	  		item.itemNum = i++;
-      		tempMenuList.push_back(item);
+	  		item.itemNum = ++i;
+			menuList.push_back(item);
     	}
     file.close();
   	}
   	else {
     	std::cout << "Your menu file can not be found." << std::endl;
   	}
-	return tempMenuList;
 }
 
 //class displayOrder
-void displayOrder::displayMenu() const {
-  	std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
-  	std::cout << std::setw(5) << std::left << "No." 
+void displayOrder::prompts(const int p) const {
+	switch (p){
+		case 0:
+			std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
+			break;
+		case 1:
+			std::cout << "Would you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
+			break;
+		case 2:
+			std::cout << "Would you like to continue your order? ";
+			break;
+		case 3:
+			std::cout << "Enter the item number: ";
+			break;
+		case 4:
+			std::cout << "How many of the item would you like to order? ";
+			break;
+		case 5:
+			std::cout << "Would you like to order another item? ";
+			break;
+		case 6:
+			std::cout << "\nThank you for choosing Basil & Thyme Cafe to satisfy your hunger!\n";
+			break;
+		default:
+			break;
+	}
+}
+
+void displayOrder::displayMenu(const int& itemNum, const std::string& item, const double& price) const {
+	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
               << std::endl;
-  	int i = 1;
-  	for (const auto& item : menu.menuList){
-		std::cout << std::setw(5) << std::left << i 
-              	  << std::setw(15) << std::left << item.menuItem 
-              	  << std::setw(15) << std::left << item.menuPrice 
-              	  << std::endl;
-	}
+	std::cout << std::setw(5) << std::left << itemNum
+              << std::setw(15) << std::left << item 
+              << std::setw(15) << std::left << price 
+              << std::endl;
   	std::cout << std::endl;
 }
 
-void displayOrder::startOrder() {
-	std::cout << "Would you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
-}
-
-void displayOrder::continueOrder() {
-	std::cout << "Would you like to continue your order? ";
-}
-
-void displayOrder::printReceipt(const receipt& newReceipt) const {
-	std::cout << "\nThank you for choosing Basil & Thyme Cafe to satisfy your hunger!\n"
-			  << std::setw(12) << std::right << std::setprecision(2) << std::fixed
-			  << "Tax: " << newReceipt.totalTax << std::endl;
+void displayOrder::displayReceipt(const double& taxtotal, const double& total) {
+	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
+			  << "Tax: " << taxtotal << std::endl;
   	std::cout << std::left 
-              << "Amount Due: " << newReceipt.sumWithTax << "\n";
+              << "Amount Due: " << total << "\n";
 }
 
 // class order
-bool order::orderInProgress() {
-	newOrder.startOrder();
-	std::cin >> newCustomer.answer;
-	validateAnswer();
-	while (tempInput >= -1){
-		switch(tempInput){
-			case 0:
-				return true;
-			case 1:
-				orderedItems.push_back(addToOrder());
-				newCustomer.answer = orderedItems.back().answer;
-				break;
-			default:
-				newOrder.continueOrder();
-				std::cin >> newCustomer.answer;
-				break;
-		}
-		validateAnswer();
-	}
-	return false;
-}
-
-void order::validateAnswer() {
-	switch (newCustomer.answer){
+int order::validateAnswer(const char temp) {
+	switch (temp){
 		case 'Y':
 		case 'y':
-			tempInput = 1;
-			break;
+			return 1;			
 		case 'N':
 		case 'n':
-			tempInput = 0;
-			break;
+			return 0;
 		default:
-			tempInput = -1;
-			break;
+			return -1;
 	}
 }
 
-const customerInput order::addToOrder() {
+customerInput order::addToOrder(const displayOrder& display) {
 	customerInput tempCustomerOrder;
-	std::cout << "Enter the item number: ";
+	display.prompts(3);
 	std::cin >> tempCustomerOrder.choice;
-	std::cout << "How many of the item would you like to order? ";
+	display.prompts(4);
 	std::cin >> tempCustomerOrder.multiple;
-	std::cout << "Would you like to order another item? ";
-	std::cin >> tempCustomerOrder.answer;
+	display.prompts(5);
 	return tempCustomerOrder;
 }
