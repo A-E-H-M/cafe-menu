@@ -9,16 +9,14 @@ project ( cafe-menu
 		  LANGUAGES CXX
   		  DESCRIPTION "A simple ordering system" )
 
-option ( CAFE_MENU_BUILD_TESTS "Build unit tests" OFF)
+#option ( CAFE_MENU_BUILD_TESTS "Build unit tests" OFF)
 option ( CAFE_MENU_BUILD_EXAMPLES "Build examples" OFF)
-option ( CAFE_MENU_INSTALL "Install header only library" OFF)
+#option ( CAFE_MENU_INSTALL "Install header only library" OFF)
 
 # add library
-
 add_library ( cafe-menu INTERFACE )
 
 # configure library target
-
 target_include_directories ( cafe-menu INTERFACE
 							 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR/include/>}
 					 		 $<INSTALL_INTERFACE:include/> )
