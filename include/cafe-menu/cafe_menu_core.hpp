@@ -1,8 +1,7 @@
 #pragma once
 
 #include <vector>
-
-#include "cafe-menu/cafe_menu_iostream.hpp"
+#include <iostream>
 
 namespace cafeMenu
 {

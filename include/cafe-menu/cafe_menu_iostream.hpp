@@ -1,10 +1,7 @@
-// By: Alex H Mann
 #pragma once
 
 #include <string>
 #include <vector>
-
-#include "cafe-menu/cafe_menu_core.hpp"
 
 namespace cafeMenu
 {
@@ -19,24 +16,20 @@ namespace cafeMenu
 		int multiple;
 		double itemTotal {0.0};
 	};
-	
-	struct billItemization {
-		double tax {0.0};
+
+	struct invoice {
+		double tax {0.05};
 		double subTotal {0.0};
 		double taxTotal {0.0};
 		double total {0.0};
 	};
 
-	class menuCatalog {
+	class display {
 		public:
 			std::vector<menuItem> menuList;
-		
+			
 			void setMenu(const std::string& filePath);
-	};
-
-	class displayOrder {
-		public:
-			void displayMenu(const int&, const std::string&, const double&) const;
+			void displayMenu() const;
 			void prompts(const int p) const;
 			void displayReceipt(const double&, const double&);
 	};
@@ -47,7 +40,7 @@ namespace cafeMenu
 			std::vector<double> orderItemTotals;
 
 			int validateAnswer(const char temp);
-			customerInput addToOrder(const displayOrder& display);
+			customerInput addToOrder(const display& ndisplay);
 	};
 
 };

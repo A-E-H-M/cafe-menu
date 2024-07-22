@@ -2,42 +2,45 @@
 #include <vector>
 #include <iostream>
 
-#include "cafe-menu/cafe_menu_iostream.hpp"
-#include "cafe-menu/cafe_menu_core.hpp"
+#include "../include/cafe-menu/cafe_menu_iostream.hpp"
+#include "../include/cafe-menu/cafe_menu_core.hpp"
 
 using namespace cafeMenu;
 
 int main(){
+// Initial state
 	char customerInput;
 	int temp {1};
 
-	menuCatalog menu;
-	displayOrder display;
+	display nDisplay;
 	order nOrder;
-	billItemization billItems;
+
+	invoice nInvoice;
 	calculateBill nBill;
 
-	menu.setMenu("current.txt");
-	display.prompts(0);
-	while (temp >= -1){
+	nDisplay.setMenu("current_menu.txt");
+
+	nDisplay.prompts(0);
+	nDisplay.displayMenu();
+	nDisplay.prompts(1);
+	while (temp > 0){
 		std::cin >> customerInput;
 		temp = nOrder.validateAnswer(customerInput);	
 		switch (temp){
 			case 0:
 				break;
 			case 1:
-				nOrder.orderedItems.push_back(nOrder.addToOrder(display));
+				nOrder.orderedItems.push_back(nOrder.addToOrder(nDisplay));
 				break;
 			default:
-				display.prompts(2);
+				nDisplay.prompts(2);
 				break;
 		}
 	};
 	
-// Final state starts
-	
+// Calculation state
 	for (auto& oI: nOrder.orderedItems){
-		for (auto& mI: menu.menuList){
+		for (auto& mI: nDisplay.menuList){
 			if (oI.choice == mI.itemNum){
 				oI.itemTotal = nBill.calculateItemTotal(mI.menuPrice, oI.multiple);
 				nOrder.orderItemTotals.push_back(oI.itemTotal);
@@ -45,9 +48,13 @@ int main(){
 		};
 	};
 
-	billItems.subTotal = nBill.calculateSubTotal(nOrder.orderItemTotals);
-	billItems.taxTotal = nBill.calculateTax(billItems.subTotal, billItems.tax);
-	billItems.total = nBill.calculateTotal(billItems.subTotal, billItems.taxTotal);
+	nInvoice.subTotal = nBill.calculateSubTotal(nOrder.orderItemTotals);
+	nInvoice.taxTotal = nBill.calculateTax(nInvoice.subTotal, nInvoice.tax);
+	nInvoice.total = nBill.calculateTotal(nInvoice.subTotal, nInvoice.taxTotal);
+
+// Final state
+	nDisplay.prompts(6);
+	nDisplay.displayReceipt(nInvoice.taxTotal, nInvoice.total);
 
   	return 0;
 };

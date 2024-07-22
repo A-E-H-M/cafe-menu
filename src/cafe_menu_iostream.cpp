@@ -1,5 +1,3 @@
-// By: Alex H Mann
-
 #include <iostream> 
 #include <fstream>
 #include <sstream>
@@ -7,13 +5,12 @@
 #include <iomanip>
 #include <vector>
 
-#include "cafe-menu/cafe_menu_iostream.hpp"
-#include "cafe-menu/cafe_menu_core.hpp"
+#include "../include/cafe-menu/cafe_menu_iostream.hpp"
 
 using namespace cafeMenu;
 
-// class menu
-void menuCatalog::setMenu(const std::string& filePath) {
+// class displayOrder
+void display::setMenu(const std::string& filePath) {
  	std::fstream file(filePath);
  	if (file.is_open()){
     	std::string line;
@@ -36,14 +33,13 @@ void menuCatalog::setMenu(const std::string& filePath) {
   	}
 }
 
-//class displayOrder
-void displayOrder::prompts(const int p) const {
+void display::prompts(const int p) const {
 	switch (p){
 		case 0:
-			std::cout << "Welcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
+			std::cout << "\nWelcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
 			break;
 		case 1:
-			std::cout << "Would you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
+			std::cout << "\nWould you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
 			break;
 		case 2:
 			std::cout << "Would you like to continue your order? ";
@@ -65,23 +61,25 @@ void displayOrder::prompts(const int p) const {
 	}
 }
 
-void displayOrder::displayMenu(const int& itemNum, const std::string& item, const double& price) const {
+void display::displayMenu() const {
 	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
               << std::endl;
-	std::cout << std::setw(5) << std::left << itemNum
-              << std::setw(15) << std::left << item 
-              << std::setw(15) << std::left << price 
-              << std::endl;
-  	std::cout << std::endl;
+	for (auto& item: menuList){
+		std::cout << std::setw(5) << std::left << item.itemNum
+				  << std::setw(15) << std::left << item.menuItem 
+				  << std::setw(15) << std::left << item.menuPrice 
+				  << std::endl;
+	}
 }
 
-void displayOrder::displayReceipt(const double& taxtotal, const double& total) {
+void display::displayReceipt(const double& taxtotal, const double& total) {
 	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
 			  << "Tax: " << taxtotal << std::endl;
   	std::cout << std::left 
               << "Amount Due: " << total << "\n";
+	std::cout << std::endl;
 }
 
 // class order
@@ -94,16 +92,16 @@ int order::validateAnswer(const char temp) {
 		case 'n':
 			return 0;
 		default:
-			return -1;
+			return 2;
 	}
 }
 
-customerInput order::addToOrder(const displayOrder& display) {
+customerInput order::addToOrder(const display& nDisplay) {
 	customerInput tempCustomerOrder;
-	display.prompts(3);
+	nDisplay.prompts(3);
 	std::cin >> tempCustomerOrder.choice;
-	display.prompts(4);
+	nDisplay.prompts(4);
 	std::cin >> tempCustomerOrder.multiple;
-	display.prompts(5);
+	nDisplay.prompts(5);
 	return tempCustomerOrder;
 }
