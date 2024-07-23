@@ -6,7 +6,7 @@
 cmake_minimum_required ( VERSION 3.14 FATAL_ERROR )
 
 # create project
-project ( cafe_menu_test 
+project ( cafe_menu_example 
 		  LANGUAGES CXX )
 
 # add executable
@@ -14,4 +14,4 @@ add_executable ( cafe_menu_example cafe_menu_example.cpp )
 target_compile_features ( cafe_menu_example PRIVATE cxx_std_20 )
 
 #link dependencies
-target_link_libraries ( cafe_menu_example PRIVATE cafe_menu )
+target_link_libraries ( cafe_menu_example PRIVATE cafe_menu_core cafe_menu_iostream )
