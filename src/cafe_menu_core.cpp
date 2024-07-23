@@ -1,7 +1,8 @@
 #include <vector>
 #include <iostream>
 
-#include "../include/cafe-menu/cafe_menu_core.hpp"
+#include "cafe-menu/cafe_menu_core.hpp"
+//#include "../include/cafe-menu/cafe_menu_core.hpp"
 
 using namespace cafeMenu;
 
