@@ -10,30 +10,6 @@
 
 using namespace cafeMenu;
 
-// class displayOrder
-void display::setMenu(const std::string& filePath) {
- 	std::fstream file(filePath);
- 	if (file.is_open()){
-    	std::string line;
-		std::string strMenuPrice;
-		int i {0};
-    	while (getline(file, line)){
-      		std::stringstream tempStruct(line);
-      		menuItem item;
-      		std::getline(tempStruct, item.menuItem);
-      		std::getline(file, strMenuPrice);
-      		tempStruct >> strMenuPrice;
-	  		item.menuPrice = stod(strMenuPrice);
-	  		item.itemNum = ++i;
-			menuList.push_back(item);
-    	}
-    file.close();
-  	}
-  	else {
-    	std::cout << "Your menu file can not be found." << std::endl;
-  	}
-}
-
 void display::prompts(const int p) const {
 	switch (p){
 		case 0:
@@ -81,20 +57,6 @@ void display::displayReceipt(const double& taxtotal, const double& total) {
   	std::cout << std::left 
               << "Amount Due: " << total << "\n";
 	std::cout << std::endl;
-}
-
-// class order
-int order::validateAnswer(const char temp) {
-	switch (temp){
-		case 'Y':
-		case 'y':
-			return 1;			
-		case 'N':
-		case 'n':
-			return 0;
-		default:
-			return 2;
-	}
 }
 
 customerInput order::addToOrder(const display& nDisplay) {
