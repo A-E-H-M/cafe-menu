@@ -1,16 +1,14 @@
 #include <iostream> 
-#include <fstream>
-#include <sstream>
 #include <string>
 #include <iomanip>
 #include <vector>
 
-#include "cafe-menu/cafe_menu_iostream.hpp"
-//#include "../include/cafe-menu/cafe_menu_iostream.hpp"
+//#include "cafe-menu/cafe_menu_iostream.hpp"
+#include "../include/cafe-menu/cafe_menu_iostream.hpp"
 
 using namespace cafeMenu;
 
-void display::prompts(const int p) const {
+void display::prompts(int p) const {
 	switch (p){
 		case 0:
 			std::cout << "\nWelcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
@@ -38,7 +36,7 @@ void display::prompts(const int p) const {
 	}
 }
 
-void display::displayMenu() const {
+void display::displayMenu(const std::vector<menuItem>& menuList) const {
 	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
@@ -51,7 +49,7 @@ void display::displayMenu() const {
 	}
 }
 
-void display::displayReceipt(const double& taxtotal, const double& total) {
+void display::displayReceipt(double& taxtotal, double& total) {
 	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
 			  << "Tax: " << taxtotal << std::endl;
   	std::cout << std::left 
@@ -59,7 +57,7 @@ void display::displayReceipt(const double& taxtotal, const double& total) {
 	std::cout << std::endl;
 }
 
-customerInput order::addToOrder(const display& nDisplay) {
+customerInput display::addToOrder(const display& nDisplay) {
 	customerInput tempCustomerOrder;
 	nDisplay.prompts(3);
 	std::cin >> tempCustomerOrder.choice;

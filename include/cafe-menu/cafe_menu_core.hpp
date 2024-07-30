@@ -18,18 +18,19 @@ namespace cafeMenu
 		double total {0.0};
 	};
 
-std::vector<menuItem> menuList;
-
-
-	void setMenu(const std::string& filePath);
-
-	int validateAnswer(const char temp);
-
+	//bool status {true};
+	std::vector<menuItem> menuList;
+	std::vector<char> validResponses { 'Y', 'y', 'N', 'n', 'A', 'a', 'R', 'r' };
 	std::vector<double> orderItemTotals;
 
-	double calculateItemTotal(const double& itemPrice, const int& multiple) const;
+	void setOrderStatus(bool status);
+	void setMenu(const std::string& filePath);
+	int validateResponse(const char response) const;
+	//int validateAnswer(const char temp);
+
+	double calculateItemTotal(double& itemPrice, int& multiple) const;
 	double calculateSubTotal(const std::vector<double>& costByItem) const;
-	double calculateTax(const double& total, const double& tax) const;
-	double calculateTotal(const double& subTotal, const double& tax) const;
+	double calculateTax(double& total, double& tax) const;
+	double calculateTotal(double& subTotal, double& tax) const;
 	
 }

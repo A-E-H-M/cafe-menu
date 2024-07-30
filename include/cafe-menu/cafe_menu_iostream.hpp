@@ -3,22 +3,22 @@
 #include <string>
 #include <vector>
 
+#include "cafe_menu_core.hpp"
+
 namespace cafeMenu
 {
 	struct customerInput {
+		char answer;
 		int choice; 
 		int multiple;
 		double itemTotal {0.0};
 	};
 
-	class display {
-		public:
-			std::vector<customerInput> orderedItems;
+	std::vector<customerInput> orderedItems;
 
-			void displayMenu() const;
-			void prompts(const int p) const;
-			void displayReceipt(const double&, const double&);
+	void displayMenu(const std::vector<menuItem>& menuList) const;
+	void prompts(int p) const;
+	void displayReceipt(double& taxTotal, double& total);
 
-			customerInput addToOrder(const display& ndisplay);
-	};
-};
+	customerInput addToOrder(const display& ndisplay);
+}
