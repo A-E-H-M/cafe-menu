@@ -8,7 +8,21 @@
 
 using namespace cafeMenu;
 
-void display::prompts(int p) const {
+char setAnswer(){
+	char answer;
+	std::cin >> answer;
+	std::cin.sync();
+	return answer;
+}
+
+int setChoice(){
+	int choice;
+	std::cin >> choice;
+	std::cin.sync();
+	return choice;
+}
+
+void prompts(int p) {
 	switch (p){
 		case 0:
 			std::cout << "\nWelcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
@@ -36,7 +50,7 @@ void display::prompts(int p) const {
 	}
 }
 
-void display::displayMenu(const std::vector<menuItem>& menuList) const {
+void displayMenu(const std::vector<menuItem>& menuList) const {
 	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
@@ -49,7 +63,7 @@ void display::displayMenu(const std::vector<menuItem>& menuList) const {
 	}
 }
 
-void display::displayReceipt(double& taxtotal, double& total) {
+void displayReceipt(double& taxtotal, double& total) {
 	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
 			  << "Tax: " << taxtotal << std::endl;
   	std::cout << std::left 
@@ -57,7 +71,7 @@ void display::displayReceipt(double& taxtotal, double& total) {
 	std::cout << std::endl;
 }
 
-customerInput display::addToOrder(const display& nDisplay) {
+customerInput addToOrder(const display& nDisplay) {
 	customerInput tempCustomerOrder;
 	nDisplay.prompts(3);
 	std::cin >> tempCustomerOrder.choice;

@@ -19,14 +19,17 @@ namespace cafeMenu
 	};
 
 	//bool status {true};
-	std::vector<menuItem> menuList;
-	std::vector<char> validResponses { 'Y', 'y', 'N', 'n', 'A', 'a', 'R', 'r' };
-	std::vector<double> orderItemTotals;
+	struct vec {
+		std::vector<menuItem> menuList;
+		std::vector<char> validResponses { 'Y', 'y', 'N', 'n', 'A', 'a', 'R', 'r' };
+		std::vector<double> orderItemTotals;
+	};
 
-	void setOrderStatus(bool status);
-	void setMenu(const std::string& filePath);
-	int validateResponse(const char response) const;
-	//int validateAnswer(const char temp);
+	std::vector<menuItem> setMenu(const std::string& filePath);
+	//int validateResponse(const char response) const;
+	bool validateChoice(int choice, const std::vector<menuItem>& menu)
+	int validateAnswer(const char temp);
+	int evalState(int answer);
 
 	double calculateItemTotal(double& itemPrice, int& multiple) const;
 	double calculateSubTotal(const std::vector<double>& costByItem) const;

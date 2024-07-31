@@ -4,38 +4,91 @@
 
 //#include "cafe-menu/cafe_menu_iostream.hpp"
 //#include "cafe-menu/cafe_menu_core.hpp"
-#include "../include/cafe-menu/cafe_menu_iostream.hpp"
-#include "../include/cafe-menu/cafe_menu_core.hpp"
-//#include "cafe_menu_example.hpp"
+//#include "../include/cafe-menu/cafe_menu_iostream.hpp"
+//#include "../include/cafe-menu/cafe_menu_core.hpp"
+#include "cafe_menu_example.hpp"
 
 using namespace cafeMenu;
 
-void sStartUp();
-void sModifyOrder();
-void sUpdateOrder();
-void sUpdateTotals();
-void sUpdateStatus();
-void sFinalizeOrder();
+CM::CM(const std::string& textMenu){
+	init(textMenu);
+}
 
-int main(){
-	bool running {true};
-	customerInput cInput;
-	invoice nInvoice;
-	validResponses cResponses;
+void CM::init(const std::string& path){
+	lists.menuList = setMenu(path);
+}
 
+void CM::sRun(){
 	sStartUp();
 	while (running){
-		if (sUpdateStatus());
-		sModifyOrder();
-		sUpdateOrder();
-		sUpdateTotals();
-		sUpdateStatus();
-	}
+		switch (state){
+			case 2:
+				sUpdateOrder();
+				break;
+			case 3:
+				sModifyOrder();
+				sUpdateTotals();
+				break;
+			default:
+				sUpdateState();
+		};
+		sUpdateDisplay();
+	};
 	sFinalizeOrder();
+}
 
-		
-		
-		
+void CM::sStartUp(){
+	displayMenu(lists.menuList);
+	prompts(0);
+	prompts(1);
+	cInput.answer = setAnswer();
+};
+
+void CM::sUpdateOrder() {
+	cInput.answer = setAnswer();
+};
+
+void CM::sModifyOrder(){
+	cInput.choice = setChoice();
+	if (validateChoice(cInput.choice, lists.menuList)){
+		cInput.multiple = setChoice();
+	}
+
+};
+
+void CM::sUpdateTotals(){
+	
+};
+
+void CM::sUpdateState(){
+	state = evalState(validateAnswer(cInput.answer));
+	switch (state){
+		case 2:
+			break;
+		case 3:
+			state = 2;
+		case 4:
+			running = false;
+
+	}
+};
+
+void CM::sUpdateDisplay(){
+	switch (state){
+		case 1:
+			prompts(3);
+			break;
+		case 2:
+			prompts(2);
+		default:
+			prompts(2);
+	}
+};
+
+void CM::sFinalizeOrder(){
+	
+};
+
 		
 		
 /*
@@ -87,9 +140,8 @@ int main(){
 	nDisplay.prompts(6);
 	nDisplay.displayReceipt(nInvoice.taxTotal, nInvoice.total);
 */
-  	return 0;
-};
 
+/*
 void sStartUp(){
 	setMenu("current_menu.txt");
 	displayMenu(menuList);
@@ -128,3 +180,5 @@ if (error == 1){
 	std::cout << "Could be start order.\n";
 }
 };	
+*/
+

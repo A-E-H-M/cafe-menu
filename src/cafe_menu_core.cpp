@@ -9,15 +9,14 @@
 
 using namespace cafeMenu;
 
-void setOrderStatus(bool status){
-	running = status;
-}
-
-void setMenu(const std::string& filePath) {
+//void setMenu(const std::string& filePath) {
+std::vector<menuItem> setMenu(const std::string& filePath) {
  	std::fstream file(filePath);
+	std::vector<menuItem> temp;
  	if (file.is_open()){
     	std::string line;
 		std::string strMenuPrice;
+		//std::vector<menuItem> temp;
 		int i {0};
     	while (getline(file, line)){
       		std::stringstream tempStruct(line);
@@ -27,17 +26,18 @@ void setMenu(const std::string& filePath) {
       		tempStruct >> strMenuPrice;
 	  		item.menuPrice = stod(strMenuPrice);
 	  		item.itemNum = ++i;
-			menuList.push_back(item);
+			temp.push_back(item);
     	}
     file.close();
   	}
   	else {
     	std::cout << "Your menu file can not be found." << std::endl;
-		setOrderStatus(false);
-		int error = 1;
+		exit (-1);
   	}
+	return temp;
 }
 
+/*
 int validateResponse(const char response) const {
 	for (auto& choice: validResponses){
 		if (response == choice)
@@ -45,8 +45,18 @@ int validateResponse(const char response) const {
 	}
 	return 0;
 }
+*/
 
-/*
+bool validateChoice(int choice, const std::vector<menuItem>& menu){
+	auto numItems = menu.size();
+	if (choice >= 1 && choice < numItems){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 int validateAnswer(const char temp) {
 	switch (temp){
 		case 'Y':
@@ -54,12 +64,22 @@ int validateAnswer(const char temp) {
 			return 1;			
 		case 'N':
 		case 'n':
-			return 0;
-		default:
 			return 2;
+		default:
+			return 3;
 	}
 }
-*/
+
+int evalState(int answer){
+	switch (answer){
+		case 1:
+			return 2;
+		case 2:
+			return 3;
+		case 3:
+			return 4;
+	};
+}
 
 double calculateItemTotal(double& itemPrice, int& multiple) const {
 	return itemPrice * multiple;
