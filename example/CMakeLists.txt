@@ -11,7 +11,6 @@ project ( cafe_menu_example
 
 # add executable
 add_executable ( cafe_menu_example cafe_menu_example.cpp )
-target_compile_features ( cafe_menu_example PRIVATE cxx_std_20 )
 
 #link dependencies
-target_link_libraries ( cafe_menu_example PRIVATE cafe_menu_core cafe_menu_iostream )
+target_link_libraries ( cafe_menu_example PUBLIC cafe_menu_core_lib cafe_menu_iostream_lib )
