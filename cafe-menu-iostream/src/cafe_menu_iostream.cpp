@@ -3,8 +3,9 @@
 #include <iomanip>
 #include <vector>
 
-//#include "cafe-menu/cafe_menu_iostream.hpp"
-#include "../include/cafe-menu/cafe_menu_iostream.hpp"
+//#include "../include/cafe_menu_iostream.hpp"
+#include "cafe_menu_iostream.hpp"
+#include "cafe_menu_core.hpp"
 
 using namespace cafeMenu;
 
@@ -50,7 +51,7 @@ void prompts(int p) {
 	}
 }
 
-void displayMenu(const std::vector<menuItem>& menuList) const {
+void displayMenu(const std::vector<menuItem>& menuList) {
 	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
@@ -71,6 +72,7 @@ void displayReceipt(double& taxtotal, double& total) {
 	std::cout << std::endl;
 }
 
+/*
 customerInput addToOrder(const display& nDisplay) {
 	customerInput tempCustomerOrder;
 	nDisplay.prompts(3);
@@ -80,3 +82,4 @@ customerInput addToOrder(const display& nDisplay) {
 	nDisplay.prompts(5);
 	return tempCustomerOrder;
 }
+*/

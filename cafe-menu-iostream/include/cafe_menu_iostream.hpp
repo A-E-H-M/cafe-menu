@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+//#include "../../cafe-menu-core/include/cafe_menu_core.hpp"
 #include "cafe_menu_core.hpp"
 
 namespace cafeMenu
@@ -17,9 +18,9 @@ namespace cafeMenu
 	char setAnswer();
 	int setChoice();
 
-	void displayMenu(const std::vector<menuItem>& menuList) const;
+	void displayMenu(const std::vector<menuItem>& menuList);
 	void prompts(int p);
 	void displayReceipt(double& taxTotal, double& total);
 
-	customerInput addToOrder(const display& ndisplay);
+	//customerInput addToOrder(const display& ndisplay);
 }

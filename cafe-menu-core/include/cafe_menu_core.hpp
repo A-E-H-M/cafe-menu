@@ -27,13 +27,13 @@ namespace cafeMenu
 
 	std::vector<menuItem> setMenu(const std::string& filePath);
 	//int validateResponse(const char response) const;
-	bool validateChoice(int choice, const std::vector<menuItem>& menu)
+	bool validateChoice(int choice, const std::vector<menuItem>& menu);
 	int validateAnswer(const char temp);
-	int evalState(int answer);
+	//int evalState(int answer);
 
-	double calculateItemTotal(double& itemPrice, int& multiple) const;
-	double calculateSubTotal(const std::vector<double>& costByItem) const;
-	double calculateTax(double& total, double& tax) const;
-	double calculateTotal(double& subTotal, double& tax) const;
+	double calculateItemTotal(double& itemPrice, int& multiple);
+	double calculateSubTotal(const std::vector<double>& costByItem);
+	double calculateTax(double& total, double& tax);
+	double calculateTotal(double& subTotal, double& tax);
 	
 }

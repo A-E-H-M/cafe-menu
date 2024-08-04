@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-//#include "cafe-menu/cafe_menu_core.hpp"
-#include "../include/cafe-menu/cafe_menu_core.hpp"
+//#include "../include/cafe_menu_core.hpp"
+#include "cafe_menu_core.hpp"
 
 using namespace cafeMenu;
 
@@ -70,7 +70,7 @@ int validateAnswer(const char temp) {
 	}
 }
 
-int evalState(int answer){
+/*int evalState(int answer){
 	switch (answer){
 		case 1:
 			return 2;
@@ -80,12 +80,13 @@ int evalState(int answer){
 			return 4;
 	};
 }
+*/
 
-double calculateItemTotal(double& itemPrice, int& multiple) const {
+double calculateItemTotal(double& itemPrice, int& multiple) {
 	return itemPrice * multiple;
 }
 
-double calculateSubTotal(const std::vector<double>& costByItem) const {
+double calculateSubTotal(const std::vector<double>& costByItem) {
 	double total {0};
 	for (auto& item: costByItem){
 		total += item;
@@ -93,10 +94,10 @@ double calculateSubTotal(const std::vector<double>& costByItem) const {
 	return total;
 }
 
-double calculateTax(double& total, double& tax) const {
+double calculateTax(double& total, double& tax) {
 	return total * tax;
 }
 
-double calculateTotal(double& subTotal, double& tax) const {
+double calculateTotal(double& subTotal, double& tax) {
 	return subTotal + tax;
 }
