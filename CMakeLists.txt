@@ -9,9 +9,6 @@ project ( cafe_menu
 		  LANGUAGES CXX
   		  DESCRIPTION "A simple ordering system" )
 
-# Default C++ standard for targets
-set( CMAKE_CXX_STANDARD 20 )
-
 # Optional flags
 option ( CAFE_MENU_BUILD_TESTS "Build unit tests" OFF)
 option ( CAFE_MENU_BUILD_EXAMPLES "Build examples" OFF)
