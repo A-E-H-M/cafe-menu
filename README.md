@@ -1,5 +1,5 @@
 # Cafe Menu
-
+Cafe Menu is a simple point of sale library written in C++.
 <!-- ### Unit Test and Documentation Generation Workflow Status -->
 <!-- ![GH Actions Workflow Status] -->
 <!-- ![GH Actions Workflow Status] -->
@@ -7,23 +7,32 @@
 <!-- ![GH Tag] -->
 
 ## Overview
+Cafe Menu is built to provide library users the basic functionality of a point of sale system. It supports three key areas of an order transaction: menu management, order management, and order calculations.
 
-The cafe_menu interface consists of two libraries: 'cafe_menu_core' and 'cafe_menu_iostream'. The dedicated namespace of cafeMenu can be used to access all classes.
+## Organization
+Cafe Menu is a combination of two separate libraries: cafe_menu_core (CMC) and cafe_menu_iostream (CMIO). CMC contains all the business logic that does not handle display input or output, whereas CMIO only handles display input and output. Ex. CMC contains a function to calculate a total, whereas CMIO contains a function to display the total.
+
+While CMIO does not have to be used and the library user can create their own input/output handling, it provides an out-of-the-box option to get the library user up and running as fast as possible.
+
+There is a dedicated namespace for accessing all the classes called cafe_menu.
+
+## Who Should Use This
+Cafe Menu is for anyone who feels like they want a lean point of sale system. It could be for any user who would like to create a point of sale application with the support of their graphics library of their choosing.
+
+## Prerequisites
+- CMake
+- C++ 17
+
+## Dependencies
+Cafe Menu does use [CMP](https://github.com/cpm-cmake/CPM.cmake) for dependancy management in Cmake. The build has been configured to download CMP from its Github repo if it is not already installed.
+
+The unit test code uses [Catch2](https://github.com/catchorg/Catch2.git). If the 'CAFE_MENU_BUILD_TESTS' flag is provided to Cmake the Cmake configure / generate will download the Catch2.
 
 <!-- ## Generated Documentation -->
 <!-- The generated Doxygen documentation for 'cafe_menu' is [here] (https) -->
 
-## Dependencies
-'cafe_menu' file does not have any third-party dependencies. It uses C++ standard library headers only. <!-- The unit test code does have dependencies as noted below. -->
-
-<!-- ## C++ Standard -->
-<!-- 'cafe_menu' uses C++17 features, including -->
-
 <!-- ## Supported Compilers -->
 <!-- Continuous integration workflows build and unit test on g++ (through Ubuntu), MSCV (through Windows), and clang  (through macOS). -->
-
-<!-- ## Unit Test Dependencies -->
-<!-- The unit test code uses [Catch2](https). If the 'CAFE_MENU_BUILD_TESTS' flag is provided to Cmake (see commands below) the Cmake configure / generate will download the Catch2 ... -->
 
 <!-- ## Build and Run Unit Tests -->
 <!-- ...Instructions to come... -->
