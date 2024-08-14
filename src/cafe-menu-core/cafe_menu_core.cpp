@@ -7,25 +7,25 @@
 //#include "../include/cafe_menu_core.hpp"
 #include "cafe_menu_core.hpp"
 
-using namespace cafeMenu;
+using namespace cafe_menu;
 
 //void setMenu(const std::string& filePath) {
-std::vector<menuItem> setMenu(const std::string& filePath) {
- 	std::fstream file(filePath);
-	std::vector<menuItem> temp;
+std::vector<menu_item> set_menu(const std::string& file_path) {
+ 	std::fstream file(file_path);
+	std::vector<menu_item> temp;
  	if (file.is_open()){
     	std::string line;
-		std::string strMenuPrice;
+		std::string str_menu_price;
 		//std::vector<menuItem> temp;
 		int i {0};
     	while (getline(file, line)){
-      		std::stringstream tempStruct(line);
-      		menuItem item;
-      		std::getline(tempStruct, item.menuItem);
-      		std::getline(file, strMenuPrice);
-      		tempStruct >> strMenuPrice;
-	  		item.menuPrice = stod(strMenuPrice);
-	  		item.itemNum = ++i;
+      		std::stringstream temp_struct(line);
+      		menu_item item;
+      		std::getline(temp_struct, item.menu_item);
+      		std::getline(file, str_menu_price);
+      		temp_struct >> str_menu_price;
+	  		item.menu_price = stod(str_menu_price);
+	  		item.item_num = ++i;
 			temp.push_back(item);
     	}
     file.close();
@@ -47,9 +47,9 @@ int validateResponse(const char response) const {
 }
 */
 
-bool validateChoice(int choice, const std::vector<menuItem>& menu){
-	auto numItems = menu.size();
-	if (choice >= 1 && choice < numItems){
+bool validate_choice(int choice, const std::vector<menu_item>& menu){
+	auto num_items = menu.size();
+	if (choice >= 1 && choice < num_items){
 		return true;
 	}
 	else {
@@ -57,7 +57,7 @@ bool validateChoice(int choice, const std::vector<menuItem>& menu){
 	}
 }
 
-int validateAnswer(const char temp) {
+int validate_answer(const char temp) {
 	switch (temp){
 		case 'Y':
 		case 'y':
@@ -82,22 +82,22 @@ int validateAnswer(const char temp) {
 }
 */
 
-double calculateItemTotal(double& itemPrice, int& multiple) {
+double calculate_item_total(double& item_price, int& multiple) {
 	return itemPrice * multiple;
 }
 
-double calculateSubTotal(const std::vector<double>& costByItem) {
+double calculate_sub_total(const std::vector<double>& cost_by_item) {
 	double total {0};
-	for (auto& item: costByItem){
+	for (auto& item: cost_by_item){
 		total += item;
 	}
 	return total;
 }
 
-double calculateTax(double& total, double& tax) {
+double calculate_tax(double& total, double& tax) {
 	return total * tax;
 }
 
-double calculateTotal(double& subTotal, double& tax) {
-	return subTotal + tax;
+double calculate_total(double& sub_total, double& tax) {
+	return sub_total + tax;
 }

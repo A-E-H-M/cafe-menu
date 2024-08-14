@@ -6,21 +6,21 @@
 //#include "../../cafe-menu-core/include/cafe_menu_core.hpp"
 #include "cafe_menu_core.hpp"
 
-namespace cafeMenu
+namespace cafe_menu
 {
-	struct customerInput {
+	struct customer_input {
 		char answer;
 		int choice; 
 		int multiple;
-		double itemTotal {0.0};
+		double item_total {0.0};
 	};
 
-	char setAnswer();
-	int setChoice();
+	char set_answer();
+	int set_choice();
 
-	void displayMenu(const std::vector<menuItem>& menuList);
+	void display_menu(const std::vector<menu_item>& menu_list);
 	void prompts(int p);
-	void displayReceipt(double& taxTotal, double& total);
+	void display_receipt(double& tax_total, double& total);
 
 	//customerInput addToOrder(const display& ndisplay);
 }

@@ -7,16 +7,16 @@
 #include "cafe_menu_iostream.hpp"
 #include "cafe_menu_core.hpp"
 
-using namespace cafeMenu;
+using namespace cafe_menu;
 
-char setAnswer(){
+char set_answer(){
 	char answer;
 	std::cin >> answer;
 	std::cin.sync();
 	return answer;
 }
 
-int setChoice(){
+int set_choice(){
 	int choice;
 	std::cin >> choice;
 	std::cin.sync();
@@ -26,7 +26,7 @@ int setChoice(){
 void prompts(int p) {
 	switch (p){
 		case 0:
-			std::cout << "\nWelcome to the Basil and Thyme Cafe! Below is our current menu.\n" << std::endl;
+			std::cout << "\nWelcome to the Basil and Thyme Cafe! Below is our current menu.\n";
 			break;
 		case 1:
 			std::cout << "\nWould you like to start an order? For 'Yes' enter (Y or y). For 'No' enter (n or N).\n";
@@ -51,22 +51,22 @@ void prompts(int p) {
 	}
 }
 
-void displayMenu(const std::vector<menuItem>& menuList) {
+void display_menu(const std::vector<menu_item>& menu_list) {
 	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
-              << std::endl;
-	for (auto& item: menuList){
-		std::cout << std::setw(5) << std::left << item.itemNum
-				  << std::setw(15) << std::left << item.menuItem 
-				  << std::setw(15) << std::left << item.menuPrice 
+              << "\n";
+	for (auto& item: menu_list){
+		std::cout << std::setw(5) << std::left << item.item_num
+				  << std::setw(15) << std::left << item.menu_item 
+				  << std::setw(15) << std::left << item.menu_price 
 				  << std::endl;
 	}
 }
 
-void displayReceipt(double& taxtotal, double& total) {
+void display_receipt(double& tax_total, double& total) {
 	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
-			  << "Tax: " << taxtotal << std::endl;
+			  << "Tax: " << tax_total << "\n";
   	std::cout << std::left 
               << "Amount Due: " << total << "\n";
 	std::cout << std::endl;
