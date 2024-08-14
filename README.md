@@ -16,7 +16,7 @@ While CMIO does not have to be used and the library user can create their own in
 
 There is a dedicated namespace for accessing all the classes called cafe_menu.
 
-## Who Should Use This
+## Who Should Use Cafe Menu
 Cafe Menu is for anyone who feels like they want a lean point of sale system. It could be for any user who would like to create a point of sale application with the support of their graphics library of their choosing.
 
 ## Prerequisites
