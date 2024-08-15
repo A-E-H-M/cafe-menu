@@ -19,20 +19,19 @@ There is a dedicated namespace for accessing all the classes called cafe_menu.
 ## Who Should Use Cafe Menu
 Cafe Menu is for anyone who feels like they want a lean point of sale system. It could be for any user who would like to create a point of sale application with the support of their graphics library of their choosing.
 
-## Prerequisites
-- CMake
-- C++ 17
+## Supported Environments & Compilers
+Continuous integration workflows currently build and unit test on g++ (through Ubuntu). In the future, MSVC (through Windows) and clang (through macOS) will be supported.
 
 ## Dependencies
-Cafe Menu does use [CMP](https://github.com/cpm-cmake/CPM.cmake) for dependancy management in Cmake. The build has been configured to download CMP from its Github repo if it is not already installed.
+Cafe Menu uses [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake) for dependency management in Cmake. The build has been configured to download CMP from its Github repo if it is not already installed.
 
 The unit test code uses [Catch2](https://github.com/catchorg/Catch2.git). If the 'CAFE_MENU_BUILD_TESTS' flag is provided to Cmake the Cmake configure / generate will download the Catch2.
+
+## C++ Standard
+C++ 11 is the minimum required C++ standard. However, C++ 17 is recommended as future versions will include C++ 17 features.
 
 <!-- ## Generated Documentation -->
 <!-- The generated Doxygen documentation for 'cafe_menu' is [here] (https) -->
 
-<!-- ## Supported Compilers -->
-<!-- Continuous integration workflows build and unit test on g++ (through Ubuntu), MSCV (through Windows), and clang  (through macOS). -->
-
-<!-- ## Build and Run Unit Tests -->
-<!-- ...Instructions to come... -->
+## Build and Run Unit Tests
+...Instructions to come... -->

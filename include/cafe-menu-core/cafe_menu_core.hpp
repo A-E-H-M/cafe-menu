@@ -50,12 +50,12 @@ namespace cafe_menu
 	int validate_answer(const char temp);
 
 	// Calculates the cost per item based on its value and how many of the item the customer would like to order. It requires a reference to an menuList member variable itemPrice and an the customer's integer input value reflective of the amount of that item would like to be ordered, both as parameters.
-	double calculateItemTotal(double& itemPrice, int multiple);
+	double calculate_item_total(double item_price, int multiple);
 	// Calculates the subtotal, without tax, of all the items in orderItemTotals vector. Requires reference to an orderItemTotals vector.
-	double calculateSubTotal(const std::vector<double>& costByItem);
+	double calculate_sub_total(const std::vector<double>& costByItem);
 	// Calculates the total tax based on the subtotal. It does not add the final tax amount to the subtotal. It returns only the total tax amount. Requires a total amount and a tax rate in the form of a decimal as parameters.
-	double calculateTax(double& total, double& tax);
+	double calculate_tax(double total, double tax);
 	//Calculates the total amount for the final bill by adding the total tax amount with the subtotal. Requires a subtotal and total tax amount to be billed to the customer as parameters.
-	double calculateTotal(double& subTotal, double& tax);
+	double calculate_total(double sub_total, double tax);
 	
 }
