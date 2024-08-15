@@ -34,4 +34,4 @@ C++ 11 is the minimum required C++ standard. However, C++ 17 is recommended as f
 <!-- The generated Doxygen documentation for 'cafe_menu' is [here] (https) -->
 
 ## Build and Run Unit Tests
-...Instructions to come... -->
+...Instructions to come...
