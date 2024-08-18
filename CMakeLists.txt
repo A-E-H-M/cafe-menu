@@ -13,9 +13,27 @@ project ( cafe_menu
 option ( CAFE_MENU_BUILD_TESTS "Build unit tests" OFF)
 option ( CAFE_MENU_BUILD_EXAMPLES "Build examples" OFF)
 
-# Libraries
-add_subdirectory ( cafe-menu-core )
-add_subdirectory ( cafe-menu-iostream )
+# Add library targets
+add_library( cafe_menu INTERFACE )
+#add_library( cafe_menu INTERFACE src/cafe-menu/cafe-menu-core/cafe_menu_core.cpp src/cafe-menu/cafe-menu-iostream/cafe_menu_iostream.cpp )
+add_library ( cafe_menu_core src/cafe-menu/cafe-menu-core/cafe_menu_core.cpp )
+#target_include_directories( cafe-menu-core PUBLIC)
+add_library ( cafe_menu_iostream src/cafe-menu/cafe-menu-iostream/cafe_menu_iostream.cpp )
+
+# target_include_directories( cafe_menu INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries( cafe_menu 
+		 				INTERFACE cafe-menu-core 
+						INTERFACE cafe-menu-iostream )
+
+target_include_directories( cafe_menu INTERFACE	
+							$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
+							$<INSTALL_INTERFACE:include/> )
+
+
+# target_link_libraries( cafe_menu 
+#					   INTERFACE cafe_menu_core 
+#					   INTERFACE cafe_menu_iostream )
 
 # Check to build unit tests
 if ( ${CAFE_MENU_BUILD_TESTS} )
