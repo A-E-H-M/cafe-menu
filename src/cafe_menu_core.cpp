@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-//#include "../include/cafe_menu_core.hpp"
 #include "cafe_menu_core.hpp"
 
 using namespace cafe_menu;
@@ -83,7 +82,7 @@ int validate_answer(const char temp) {
 */
 
 double calculate_item_total(double& item_price, int& multiple) {
-	return itemPrice * multiple;
+	return item_price * multiple;
 }
 
 double calculate_sub_total(const std::vector<double>& cost_by_item) {

@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <vector>
 
-//#include "../include/cafe_menu_iostream.hpp"
 #include "cafe_menu_iostream.hpp"
 #include "cafe_menu_core.hpp"
 

@@ -35,7 +35,7 @@ namespace cafe_menu
 	// Maintains the full menuList, a list of valid user inputs, and the list of items a customer has selected to add to their order.
 	struct vec {
 		// Maintains the list of all menu items accessible to the customer, and that have been provided to setMenu().
-		std::vector<menuItem> menu_list;
+		std::vector<menu_item> menu_list;
 		// Maintains a list of valid character inputs that are compared to the user input.
 		std::vector<char> valid_responses { 'Y', 'y', 'N', 'n', 'A', 'a', 'R', 'r' };
 		// Maintains the full list of items the customer has selected to add to their order.

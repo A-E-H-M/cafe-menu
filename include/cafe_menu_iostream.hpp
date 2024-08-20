@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-//#include "../../cafe-menu-core/include/cafe_menu_core.hpp"
 #include "cafe_menu_core.hpp"
 
 namespace cafe_menu
