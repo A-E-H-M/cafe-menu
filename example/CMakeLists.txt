@@ -13,5 +13,9 @@ project ( cafe_menu_example
 add_executable ( cafe_menu_example cafe_menu_example.cpp )
 target_compile_features( cafe_menu_example PRIVATE cxx_std_20 )
 
-#link dependencies
+# add example text file
+file ( COPY ${CMAKE_CURRENT_SOURCE_DIR}/current_menu.txt
+			DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/ )
+
+# link dependencies
 target_link_libraries ( cafe_menu_example PUBLIC cafe_menu )

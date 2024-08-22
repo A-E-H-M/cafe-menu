@@ -6,7 +6,7 @@
 
 #include "cafe_menu_core.hpp"
 
-using namespace cafe_menu;
+namespace cafe_menu {
 
 //void setMenu(const std::string& filePath) {
 std::vector<menu_item> set_menu(const std::string& file_path) {
@@ -99,4 +99,6 @@ double calculate_tax(double& total, double& tax) {
 
 double calculate_total(double& sub_total, double& tax) {
 	return sub_total + tax;
+}
+
 }

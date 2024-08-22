@@ -19,8 +19,7 @@ include ( ../cmake/download_cpm.cmake )
 CPMAddPackage ( "gh:catchorg/Catch2@3.6.0" )
 
 #link dependencies
-target_link_libraries ( cafe_menu_test PRIVATE cafe_menu_core_lib cafe_menu_iostream_lib Catch2::Catch2WithMain )
-#target_link_libraries ( cafe_menu_test PRIVATE cafe_menu_core_lib cafe_menu_iostream_lib )
+target_link_libraries ( cafe_menu_test PRIVATE cafe_menu Catch2::Catch2WithMain )
 
 enable_testing()
 

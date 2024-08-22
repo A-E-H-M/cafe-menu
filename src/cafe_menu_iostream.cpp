@@ -6,7 +6,7 @@
 #include "cafe_menu_iostream.hpp"
 #include "cafe_menu_core.hpp"
 
-using namespace cafe_menu;
+namespace cafe_menu {
 
 char set_answer(){
 	char answer;
@@ -69,6 +69,8 @@ void display_receipt(double& tax_total, double& total) {
   	std::cout << std::left 
               << "Amount Due: " << total << "\n";
 	std::cout << std::endl;
+}
+
 }
 
 /*

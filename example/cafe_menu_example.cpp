@@ -6,9 +6,11 @@
 
 using namespace cafe_menu;
 
-int main(){
-	
-	display_menu(set_menu("current_menu.txt"));
+int main(int argc, char* argv[]) {
+
+	std::string user_menu {"current_menu.txt"};
+
+	display_menu(set_menu(user_menu));
 
 	return 0;
 
