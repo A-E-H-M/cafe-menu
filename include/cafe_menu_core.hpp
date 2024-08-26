@@ -13,23 +13,23 @@ namespace cafe_menu
 	// Maintains the name, price, and number of each item.
 	struct menu_item {
 		// Record the name of the item. The default string is set to an empty string.
-		std::string menu_item {" "};
+		std::string item_name {""};
 		// Record the price of the item. The default is set to 0.0.
-		double menu_price {0.0};
+		double item_price = 0.0;
 		// Assigns a number to the menuItem related to the chronological order to its addition to the vector of menu items.
-		int item_num;
+		int item_num = 0;
 	};
 	
 	// Maintains the tax, subtotal, taxtotal, and total to encapsulate separate orders.
 	struct invoice {
 		// Maintains a tax as decimal to represent at a percentage. The default is set to 0.0.
-		double tax {0.0};
+		double tax = 0.0;
 		// Maintains the total without tax. The default is set to 0.0.
-		double sub_total {0.0};
+		double sub_total = 0.0;
 		// Maintains the total amount of tax calculated from the subtotal and tax. It does not include the addition of the subtotal and the total amount of the calculated tax. The default is set to 0.0.
-		double tax_total {0.0};
+		double tax_total = 0.0;
 		// Maintains the total amount of the final bill. This includes the addition of the subtotal and the total tax. The default is set to 0.0.
-		double total {0.0};
+		double total = 0.0;
 	};
 
 	// Maintains the full menuList, a list of valid user inputs, and the list of items a customer has selected to add to their order.
