@@ -1,0 +1,36 @@
+# Build, run unit tests
+
+name: CMake build and run unit test matrix
+
+on: pull_request:
+  types:
+    - opened
+    - reopened
+  push:
+    branches:
+      - main
+      - dev
+  env:
+    BUILD_TYPE: Release
+  jobs:
+    build_matrix:
+      strategy:
+        matrix:
+          os: [ubuntu-latest, windows-latest]
+      runs-on: ${{ matrix.os }}
+      defaults:
+        run:
+          shell: bash
+      steps:
+        - name: checkout
+          uses: actions/checkout@v4
+        - name: create-build-dir
+          uses: mkdir build
+        - name: configure-cmake
+          uses: cd build && cmake -D CAFE_MENU_BUILD_TESTS:BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES:BOOL=ON ..
+        - name: build
+          uses: cd build && cmake --build . --config $BUILD_TYPE
+        - name: run-unit-test
+          uses: cd build && ctest -C $BUILD_TYPE
+        - name: run-examples
+          uses: cd build/example && ./cafe_menu_example
