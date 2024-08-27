@@ -3,7 +3,7 @@
 
 //#include "cafe_menu_core.hpp"
 //#include "cafe_menu_iostream.hpp"
-#include "cafe_menu"
+#include <cafe_menu>
 
 using namespace cafe_menu;
 
