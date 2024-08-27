@@ -34,5 +34,8 @@ jobs:
       - name: run-unit-test
         run: cd build && ctest -C $BUILD_TYPE
       - name: run-examples
+        if: ${{ matrix.os }} == ubuntu-latest
         # run: cd build/example && bash cafe_menu_example
-        run: bash build/example/cafe_menu_example
+          run: cd build/example && ./cafe_menu_example
+        if: ${{ matrix.os }} == windows-latest
+          run: cd build/example && cafe_menu_example.exe
