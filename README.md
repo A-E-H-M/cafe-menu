@@ -1,7 +1,8 @@
 # Cafe Menu
 <!-- ### Unit Test and Documentation Generation Workflow Status -->
-<!-- ![GH Actions Workflow Status] -->
-<!-- ![GH Actions Workflow Status] -->
+![GH Actions Workflow Status](https://img.shields.io/github/last-commit/A-E-H-M/cafe-menu?style=for-the-badge)
+![GH Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/A-E-H-M/cafe-menu/build_run_unit_test_cmake.yml?style=for-the-badge)
+![GH Actions Workflow Status](https://img.shields.io/github/license/A-E-H-M/cafe-menu?style=for-the-badge)
 <!-- ![GH Actions Workflow Status] -->
 <!-- ![GH Tag] -->
 
