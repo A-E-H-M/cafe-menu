@@ -29,10 +29,9 @@ jobs:
         run: mkdir build
       - name: configure-cmake
         run: cd build && cmake -D CAFE_MENU_BUILD_TESTS:BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES:BOOL=ON ..
-        #run: cd build && cmake -D CAFE_MENU_BUILD_EXAMPLES:BOOL=ON ..
       - name: build
         run: cd build && cmake --build . --config $BUILD_TYPE
       - name: run-unit-test
         run: cd build && ctest -C $BUILD_TYPE
       - name: run-examples
-        run: cd build/example && ./cafe_menu_example
+        run: cd build/example && bash cafe_menu_example
