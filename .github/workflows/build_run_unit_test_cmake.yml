@@ -26,12 +26,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: create-build-dir
-        uses: mkdir build
+        run: mkdir build
       - name: configure-cmake
-        uses: cd build && cmake -D CAFE_MENU_BUILD_TESTS:BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES:BOOL=ON ..
+        run: cd build && cmake -D CAFE_MENU_BUILD_TESTS:BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES:BOOL=ON ..
       - name: build
-        uses: cd build && cmake --build . --config $BUILD_TYPE
+        run: cd build && cmake --build . --config $BUILD_TYPE
       - name: run-unit-test
-        uses: cd build && ctest -C $BUILD_TYPE
+        run: cd build && ctest -C $BUILD_TYPE
       - name: run-examples
-        uses: cd build/example && ./cafe_menu_example
+        run: cd build/example && ./cafe_menu_example
