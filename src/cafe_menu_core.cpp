@@ -20,10 +20,10 @@ std::vector<menu_item> set_menu(const std::string& file_path) {
     	while (getline(file, line)){
       		std::stringstream temp_struct(line);
       		menu_item item;
-      		std::getline(temp_struct, item.menu_item);
+      		std::getline(temp_struct, item.item_name);
       		std::getline(file, str_menu_price);
       		temp_struct >> str_menu_price;
-	  		item.menu_price = stod(str_menu_price);
+	  		item.item_price = stod(str_menu_price);
 	  		item.item_num = ++i;
 			temp.push_back(item);
     	}
