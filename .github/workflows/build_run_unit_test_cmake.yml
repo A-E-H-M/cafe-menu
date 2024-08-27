@@ -1,4 +1,4 @@
-# Build, run unit tests
+# Build, run unit tests, and run examples
 
 name: CMake build and run unit test matrix
 
