@@ -1,7 +1,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 #include <vector>
-#include "cafe_menu"
+
+#include "cafe_menu_iostream.hpp"
 
 using namespace cafe_menu;
 
