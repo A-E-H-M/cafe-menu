@@ -8,18 +8,19 @@
 namespace cafe_menu
 {
 	struct customer_input {
-		char answer;
-		int choice; 
-		int multiple;
-		double item_total {0.0};
+		char answer {''};
+		int choice = 0; 
+		int multiple = 1;
+		double item_total = 0.0;
 	};
 
-	char set_answer();
-	int set_choice();
+	//char set_answer();
+	//int set_choice();
 
-	void display_menu(const std::vector<menu_item>& menu_list);
+	//bool validate_choice(int choice, const std::vector<menu_item>& menu);
+	//int validate_answer(const char temp);
+
 	void prompts(int p);
-	void display_receipt(double& tax_total, double& total);
-
-	//customerInput addToOrder(const display& ndisplay);
+	void display_menu(const std::vector<menu_item>& all_menu_items);
+	void display_receipt(double& sales_tax_rate, double& total);
 }

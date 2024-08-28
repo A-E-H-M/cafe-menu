@@ -6,31 +6,49 @@
 namespace cafe_menu
 {
 	struct menu_item {
-		std::string item_name {""};
-		double item_price = 0.0;
-		int item_num = 0;
+		double price = 0.0;
+		int num = 0;
+		std::string name {""};
+		std::string description {""};
+		std::string category {""};
+		std::string ingredients {""};
 	};
-	
+
+	struct menu {
+		std::vector<menu_item> all_menu_items;
+	};
+
+	struct ordered_item {
+		int item_num = 0;
+		int num_of_item = 0;
+		bool multiple_item {false};
+	};
+
+	struct discounts {
+		bool active_discounts {false};
+		std::string name {""};
+		std::string type {""};
+		double discount_rate = 0.0;
+	};
+
 	struct invoice {
-		double tax = 0.0;
+		double sales_tax_rate = 0.0;
 		double sub_total = 0.0;
-		double tax_total = 0.0;
+		double sub_total_tax = 0.0;
 		double total = 0.0;
 	};
 
-	struct vec {
-		std::vector<menu_item> menu_list;
-		std::vector<char> valid_responses { 'Y', 'y', 'N', 'n', 'A', 'a', 'R', 'r' };
-		std::vector<double> order_item_totals;
+	struct order {
+		std::vector<ordered_item> customer_order;
+		invoice customer_invoice;
+
 	};
 
-	std::vector<menu_item> set_menu(const std::string& file_path);
-	bool validate_choice(int choice, const std::vector<menu_item>& menu);
-	int validate_answer(const char temp);
+	std::vector<menu_item> create_menu(const std::string& file_path);
 
-	double calculate_item_total(double item_price, int multiple);
-	double calculate_sub_total(const std::vector<double>& costByItem);
-	double calculate_tax(double total, double tax);
-	double calculate_total(double sub_total, double tax);
+	double calc_item_sub_total(double price, int multiple);
+	double calc_sub_total(const std::vector<ordered_item>& customer_order, const discounts& apply_discounts);
+	double calc_sub_total_tax(double sub_total, double sales_tax_rate);
+	double calc_total(double sub_total, double sub_total_tax);
 	
 }

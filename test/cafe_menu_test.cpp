@@ -24,3 +24,7 @@ TEST_CASE( "Initalize invoice", "[invoice]" ) {
 	REQUIRE( order_1.tax_total == 0.0 );
 	REQUIRE( order_1.total == 0.0 );
 }
+
+TEST_CASE( "", "[]" ){
+	
+}

@@ -7,7 +7,7 @@
 #include "cafe_menu_core.hpp"
 
 namespace cafe_menu {
-
+/*
 char set_answer(){
 	char answer;
 	std::cin >> answer;
@@ -21,6 +21,31 @@ int set_choice(){
 	std::cin.sync();
 	return choice;
 }
+
+
+bool validate_choice(int choice, const std::vector<menu_item>& menu){
+	auto num_items = menu.size();
+	if (choice >= 1 && choice < num_items){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+int validate_answer(const char temp) {
+	switch (temp){
+		case 'Y':
+		case 'y':
+			return 1;			
+		case 'N':
+		case 'n':
+			return 2;
+		default:
+			return 3;
+	}
+}
+*/
 
 void prompts(int p) {
 	switch (p){
@@ -46,41 +71,29 @@ void prompts(int p) {
 			std::cout << "\nThank you for choosing Basil & Thyme Cafe to satisfy your hunger!\n";
 			break;
 		default:
-			break;
+	break;
 	}
 }
 
-void display_menu(const std::vector<menu_item>& menu_list) {
+void display_menu(const std::vector<menu_item>& all_menu_items) {
 	std::cout << std::setw(5) << std::left << "No." 
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
               << "\n";
 	for (auto& item: menu_list){
-		std::cout << std::setw(5) << std::left << item.item_num
-				  << std::setw(15) << std::left << item.item_name 
-				  << std::setw(15) << std::left << item.item_price 
+		std::cout << std::setw(5) << std::left << all_menu_items.num
+				  << std::setw(15) << std::left << all_menu_items.name 
+				  << std::setw(15) << std::left << all_menu_items.price 
 				  << std::endl;
 	}
 }
 
-void display_receipt(double& tax_total, double& total) {
+void display_receipt(double& sales_tax_rate, double& total) {
 	std::cout << std::setw(12) << std::right << std::setprecision(2) << std::fixed
-			  << "Tax: " << tax_total << "\n";
+			  << "Tax: " << sales_tax_rate << "\n";
   	std::cout << std::left 
               << "Amount Due: " << total << "\n";
 	std::cout << std::endl;
 }
 
 }
-
-/*
-customerInput addToOrder(const display& nDisplay) {
-	customerInput tempCustomerOrder;
-	nDisplay.prompts(3);
-	std::cin >> tempCustomerOrder.choice;
-	nDisplay.prompts(4);
-	std::cin >> tempCustomerOrder.multiple;
-	nDisplay.prompts(5);
-	return tempCustomerOrder;
-}
-*/
