@@ -6,8 +6,8 @@
 namespace cafe_menu
 {
 	struct menu_item {
-		double price = 0.0;
-		int num = 0;
+		double price {0.0};
+		int num {0};
 		std::string name {""};
 		std::string description {""};
 		std::string category {""};
@@ -19,8 +19,8 @@ namespace cafe_menu
 	};
 
 	struct ordered_item {
-		int item_num = 0;
-		int num_of_item = 0;
+		int item_num {0};
+		int num_of_item {0};
 		bool multiple_item {false};
 	};
 
@@ -28,14 +28,14 @@ namespace cafe_menu
 		bool active_discounts {false};
 		std::string name {""};
 		std::string type {""};
-		double discount_rate = 0.0;
+		double discount_rate {0.0};
 	};
 
 	struct invoice {
-		double sales_tax_rate = 0.0;
-		double sub_total = 0.0;
-		double sub_total_tax = 0.0;
-		double total = 0.0;
+		double sales_tax_rate {0.0};
+		double sub_total {0.0};
+		double sub_total_tax {0.0};
+		double total {0.0};
 	};
 
 	struct order {
