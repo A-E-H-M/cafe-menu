@@ -22,7 +22,7 @@ For ease, there is a dedicated namespace for accessing all the classes called ca
 
 ## Continuous Integration
 ### Supported Environments & Compilers
-CI workflows currently build and unit test on g++ (through Ubuntu) and MSVC (through Windows). In the future, Clang (through macOS) will be supported.
+CI workflows currently build and unit test on g++ (through Ubuntu), MSVC (through Windows), and Clang (through macOS).
 
 ## Requirements
 ### Dependencies
