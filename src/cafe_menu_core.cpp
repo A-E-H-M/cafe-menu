@@ -34,16 +34,24 @@ std::vector<menu_item> create_menu(const std::string& file_path) {
 	return temp;
 }
 
-double calc_item_sub_total(double& price, int& multiple) {
-	return price * multiple;
+double calc_sub_total(const std::vector<ordered_item>& customer_order, const std::vector<menu_item> full_menu, const discounts& order_discounts) {
+	double sub_total {0};
+	for (auto& order_item: customer_order) {
+		for (auto& m_item: full_menu) {
+			if (order_item.item_num == m_item.num)
+				sub_total += m_item.price * order_item.num_of_item;
+		}
+	}
+	
+	if (order_discounts.active_discounts == true) {
+		sub_total -= calc_discounts(sub_total, order_discounts.discount_rate);
+	}
+
+	return sub_total;
 }
 
-double calc_sub_total(const std::vector<ordered_item>& customer_order, const discounts& apply_discounts) {
-	double sub_total {0};
-	for (auto& item: customer_order){
-		sub_total += item;
-	}
-	return sub_total;
+double calc_discounts(double& sub_total, double& discount_rate) {
+	return sub_total * discount_rate;
 }
 
 double calc_sub_total_tax(double& sub_total, double& sales_tax_rate) {
