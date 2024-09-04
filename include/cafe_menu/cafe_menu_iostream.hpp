@@ -8,7 +8,7 @@
 namespace cafe_menu
 {
 	struct customer_input {
-		char answer {''};
+		char answer {'\0'};
 		int choice = 0; 
 		int multiple = 1;
 		double item_total = 0.0;
