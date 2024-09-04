@@ -20,7 +20,7 @@ namespace cafe_menu
 	//bool validate_choice(int choice, const std::vector<menu_item>& menu);
 	//int validate_answer(const char temp);
 
-	void prompts(int p);
+	void prompts(const int p);
 	void display_menu(const std::vector<menu_item>& all_menu_items);
-	void display_receipt(double& sales_tax_rate, double& total);
+	void display_receipt(const double& sales_tax_rate, const double& total);
 }

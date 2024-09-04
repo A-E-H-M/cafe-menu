@@ -80,10 +80,10 @@ void display_menu(const std::vector<menu_item>& all_menu_items) {
               << std::setw(15) << std::left << "Item" 
               << std::setw(15) << std::left << "Price" 
               << "\n";
-	for (auto& item: menu_list){
-		std::cout << std::setw(5) << std::left << all_menu_items.num
-				  << std::setw(15) << std::left << all_menu_items.name 
-				  << std::setw(15) << std::left << all_menu_items.price 
+	for (auto& item: all_menu_items){
+		std::cout << std::setw(5) << std::left << item.num
+				  << std::setw(15) << std::left << item.name 
+				  << std::setw(15) << std::left << item.price 
 				  << std::endl;
 	}
 }
