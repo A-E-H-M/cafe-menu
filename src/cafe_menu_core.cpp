@@ -50,15 +50,15 @@ double calc_sub_total(const std::vector<ordered_item>& customer_order, const std
 	return sub_total;
 }
 
-double calc_discounts(double& sub_total, double& discount_rate) {
+double calc_discounts(double sub_total, double discount_rate) {
 	return sub_total * discount_rate;
 }
 
-double calc_sub_total_tax(double& sub_total, double& sales_tax_rate) {
+double calc_sub_total_tax(double sub_total, double sales_tax_rate) {
 	return sub_total * sales_tax_rate;
 }
 
-double calc_total(double& sub_total, double& sub_total_tax) {
+double calc_total(double sub_total, double sub_total_tax) {
 	return sub_total + sub_total_tax;
 }
 
