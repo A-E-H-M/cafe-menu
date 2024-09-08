@@ -34,7 +34,7 @@ std::vector<menu_item> create_menu(const std::string& file_path) {
 	return temp;
 }
 
-double calc_sub_total(const std::vector<ordered_item>& customer_order, const std::vector<menu_item> full_menu, const discounts& order_discounts) {
+double calc_sub_total(const std::vector<ordered_item>& customer_order, const std::vector<menu_item>& full_menu, const discounts& order_discounts) {
 	double sub_total {0};
 	for (auto& order_item: customer_order) {
 		for (auto& m_item: full_menu) {
@@ -43,7 +43,7 @@ double calc_sub_total(const std::vector<ordered_item>& customer_order, const std
 		}
 	}
 	
-	if (order_discounts.active_discounts == true) {
+	if (order_discounts.active_discounts) {
 		sub_total -= calc_discounts(sub_total, order_discounts.discount_rate);
 	}
 
