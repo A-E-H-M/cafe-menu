@@ -31,6 +31,9 @@
 *.out
 *.swp
 
-# Internal
+# Automations
+*.sh
+
+# Directories
 app/
 other/
