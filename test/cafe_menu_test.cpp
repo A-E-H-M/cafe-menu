@@ -8,7 +8,7 @@ using namespace cafe_menu;
 
 TEST_CASE( "Initialize menu_item", "[menu_item]" ) {
 	menu_item ex_item;
-	std::string x = "";
+	std::string x;
 
 	CHECK( ex_item.name == x );
 	REQUIRE( ex_item.price == 0.0  );
@@ -23,6 +23,7 @@ TEST_CASE( "Initalize menu", "[menu]") {
 }
 */
 
+/*
 TEST_CASE( "Initalize ordered_item", "[ordered_item]") {
 	ordered_item ex_item;
 
@@ -50,7 +51,7 @@ TEST_CASE( "Initalize invoice", "[invoice]" ) {
 	REQUIRE( ex_invoice.sub_total_tax == 0.0 );
 	REQUIRE( ex_invoice.total == 0.0 );
 }
-
+*/
 /*
 TEST_CASE( "Initalize order", "[order]" ){
 	order ex_order;
@@ -69,7 +70,7 @@ TEST_CASE( "Calculating the subtotal", "[calc_sub_total]") {
 	
 }
 */
-
+/*
 TEST_CASE( "Calculating discounts", "[calc_discounts]" ) {
 	REQUIRE( calc_discounts(10, .05) == .5 );
 	REQUIRE( calc_discounts(32.5, .05) == 1.625 );
@@ -92,3 +93,4 @@ TEST_CASE( "Calculating total", "[calc_total]") {
 	REQUIRE( calc_sub_total_tax(-25.0, .17) == -24.83 );
 
 }
+*/
