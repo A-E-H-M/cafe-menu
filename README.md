@@ -25,13 +25,15 @@ For ease, there is a dedicated namespace for accessing all the classes called ca
 CI workflows currently build and unit test on g++ (through Ubuntu), MSVC (through Windows), and Clang (through macOS).
 
 ## Requirements
+### C++ Standard
+C++ 11 is the minimum required C++ standard. However, C++ 17 is recommended as future versions will include C++ 17 features.
+
 ### Dependencies
 Cafe Menu uses [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake) for dependency management in CMake. The build has been configured to download CMP from its GitHub repository if it is not already installed.
 
-The unit test code uses [Catch2](https://github.com/catchorg/Catch2.git). If the 'CAFE_MENU_BUILD_TESTS' flag is provided to CMake the CMake configure / generate will download the Catch2.
+### Unit Test Dependencies
+The unit test code uses [Catch2](https://github.com/catchorg/Catch2.git). If the 'CAFE_MENU_BUILD_TESTS' flag is provided to CMake the CMake configure / generate will download the Catch2. Note that v3 (or later) of Catch2 is required.
 
-### C++ Standard
-C++ 11 is the minimum required C++ standard. However, C++ 17 is recommended as future versions will include C++ 17 features.
 
 <!-- ## Generated Documentation -->
 <!-- The generated Doxygen documentation for 'cafe_menu' is [here] (https) -->
