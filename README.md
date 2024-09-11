@@ -47,7 +47,7 @@ First clone the `cafe-menu` repository, then create a separate `build` directory
 
 Then, `cd` (change directory) into the `build` directory before using the following CMake commands:
 ```
-cmake -D CAFE_MENU_BUILD_TESTS::BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES::BOOL=ON ../cafe-menu/
+cmake -D CAFE_MENU_BUILD_TESTS::BOOL=ON ../cafe-menu/
 
 cmake --build .
 
@@ -58,9 +58,9 @@ For additional test output, run the unit test individually, for example:
 ```
 test/cafe_menu_test -s
 ```
-To build the [example](example/cafe_menu_example.cpp), add `CAFE_MENU_BUILD_EXAMPLES::BOOL=ON` to the CMake configure / generate command.
+To build the [example](example/cafe_menu_example.cpp), add `CAFE_MENU_BUILD_EXAMPLE::BOOL=ON` to the CMake configure / generate command.
 ```
-cmake -D CAFE_MENU_BUILD_TESTS::BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES::BOOL=ON ../cafe-menu/
+cmake -D CAFE_MENU_BUILD_TESTS::BOOL=ON -D CAFE_MENU_BUILD_EXAMPLE::BOOL=ON ../cafe-menu/
 ```
 ## About Cafe Menu
 Cafe Menu started out as a simple, single file programming exercise from a college course. It has now become a way to explore continuous integration (CI) and software design.
