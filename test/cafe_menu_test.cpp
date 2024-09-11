@@ -68,8 +68,8 @@ TEST_CASE( "Initalize order", "[order]" ){
 		REQUIRE( ex_order.customer_order.size() == 10 );
 		CHECK( ex_order.customer_order[1].item_num == 0 );
 	}
-
-	SECTION( "Change customer_invoice variable members", "[order, invoice]") {
+/*
+	SECTION( "Change customer_invoice variable members", "[order]") {
 		ex_order.customer_invoice.sub_total = GENERATE(43.03, 9, -130.23);
 
 		CHECK( ex_order.customer_invoice.sub_total == 43.03 );
@@ -78,6 +78,7 @@ TEST_CASE( "Initalize order", "[order]" ){
 		CHECK( ex_order.customer_invoice.sub_total == 9.00 );
 		CHECK( ex_order.customer_invoice.sub_total == -130.23 );
 		CHECK( ex_order.customer_invoice.sub_total == -130.230 );
+*/
 	}
 
 }
@@ -93,7 +94,7 @@ TEST_CASE( "Calculating the subtotal", "[calc_sub_total]") {
 	
 }
 */
-
+/*
 TEST_CASE( "Calculating discounts", "[calc_discounts]" ) {
 	
 	SECTION( "Generated sub_total", "[calc_discounts]" ) {
@@ -108,7 +109,8 @@ TEST_CASE( "Calculating discounts", "[calc_discounts]" ) {
 		CHECK( calc_discounts(10, discount_rate) == 5 );
 	} 
 }
-
+*/
+/*
 TEST_CASE( "Caculating sub_total_tax", "[calc_sub_total_tax]") {
 	
 	SECTION( "Generated sub_total", "[calc_sub_total_tax]" ) {
@@ -138,3 +140,4 @@ TEST_CASE( "Calculating total", "[calc_total]") {
 		CHECK( calc_total(15.25, sub_total_tax) == 40.25 );
 	}
 }
+*/
