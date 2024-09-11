@@ -78,9 +78,8 @@ TEST_CASE( "Initalize order", "[order]" ){
 		CHECK( ex_order.customer_invoice.sub_total == 9.00 );
 		CHECK( ex_order.customer_invoice.sub_total == -130.23 );
 		CHECK( ex_order.customer_invoice.sub_total == -130.230 );
-*/
 	}
-
+*/
 }
 
 /*
