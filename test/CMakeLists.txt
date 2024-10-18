@@ -17,6 +17,7 @@ target_compile_features ( cafe_menu_test PRIVATE cxx_std_20 )
 include ( ../cmake/download_cpm.cmake )
 
 CPMAddPackage ( "gh:catchorg/Catch2@3.6.0" )
+CPMAddPackage ( "gh:nlohmann/json@3.11.3" )
 
 #link dependencies
 target_link_libraries ( cafe_menu_test PRIVATE cafe_menu Catch2::Catch2WithMain )
