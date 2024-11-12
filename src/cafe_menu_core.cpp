@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "cafe_menu_core.hpp"
+#include "cafe_menu/cafe_menu_core.hpp"
 
 namespace cafe_menu {
 

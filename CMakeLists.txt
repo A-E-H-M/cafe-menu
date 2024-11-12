@@ -15,7 +15,7 @@ option ( CAFE_MENU_BUILD_EXAMPLE "Build example" OFF)
 
 # Add library targets
 add_library( cafe_menu src/cafe_menu_core.cpp src/cafe_menu_iostream.cpp )
-target_include_directories( cafe_menu PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/cafe_menu )
+target_include_directories( cafe_menu PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include )
 target_compile_features( cafe_menu PRIVATE cxx_std_20 )
 
 # Check to build unit tests
