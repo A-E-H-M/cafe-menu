@@ -23,7 +23,7 @@ jobs:
           - { name: Windows VS2019, os: windows-2019 }
           - { name: Windows VS2022, os: windows-2022 }
           - { name: Windows-Latest, os: windows-latest }
-          - { name: Linux GCC,      os: ubuntu-latest }
+          - { name: Linux GCC,      os: ubuntu-latest, flags: -fsanitizer=address }
           - { name: Linux Clang,    os: ubuntu-latest, flags: -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ }
           - { name: macOS,          os: macos-latest }
     runs-on: ${{ matrix.platform.os }}
@@ -32,17 +32,17 @@ jobs:
         shell: bash
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: create-build-dir
+      - name: Create-build-dir
         run: mkdir build
 
-      - name: configure-cmake
+      - name: Configure-cmake
         run: cd build && cmake -D CAFE_MENU_BUILD_TESTS:BOOL=ON -D CAFE_MENU_BUILD_EXAMPLES:BOOL=ON ${{matrix.platform.flags}} ..
 
-      - name: build
+      - name: Build
         run: cd build && cmake --build . --config $BUILD_TYPE
 
-      - name: run-unit-test
+      - name: Run-unit-test
         run: cd build && ctest -C $BUILD_TYPE
