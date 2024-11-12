@@ -3,7 +3,7 @@
 #include <catch2/generators/catch_generators.hpp>
 #include <vector>
 
-#include "cafe_menu_iostream.hpp"
+#include "cafe_menu/cafe_menu_iostream.hpp"
 
 using namespace cafe_menu;
 
